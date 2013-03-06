@@ -15,7 +15,7 @@ source ~/git.profile
 source ~/ariatemplates.profile
 
 # pull dot profile files from ~ to cwd
-alias pulldot='cp ~/*.profile .'
+alias dotpull='cp ~/*.profile .'
 
 # push dot profile files from cwd to ~
-alias pushdot='cp ./*.profile ~'
+alias dotpush='cp ./*.profile ~'
