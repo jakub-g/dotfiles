@@ -149,6 +149,9 @@ alias gaaa='git add -A .'
 #  Usage: gunstage foo.txt
 alias gunstage='git reset HEAD'
 
+# Get rid of the last commit.
+alias gdrop='git reset --hard HEAD^'
+
 # ======================================================
 # committing
 # ======================================================
