@@ -80,6 +80,9 @@ alias glog3="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Crese
 # Display recent local branches and last commit date (sorted by last commit date)
 alias gb='git for-each-ref --sort=-committerdate --format="%(committerdate:short) %(refname:short)" refs/heads/'
 
+# Display recent local branches - only a few of them (10 by default)
+alias gbh='gb | head'
+
 # Display recent local branches - short (only names) (sorted by last commit date)
 alias gbs='git for-each-ref --sort=-committerdate --format="%(refname:short)" refs/heads/'
 
@@ -172,9 +175,11 @@ alias gamenddate='git commit --amend --date="$(date -R)"'
 
 # Cherry-pick
 alias gcp='git cherry-pick'
+complete -F _gitbranches gcp
 
 # Cherry-pick / back-port the bugfix: append a line that says "(cherry picked from commit ...)"
 alias gcpx='git cherry-pick -x'
+complete -F _gitbranches gcpx
 
 # ======================================================
 # executing pre-commit hook
