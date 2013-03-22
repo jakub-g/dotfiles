@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # Aria Templates command line shortcuts
+#
+# Note: Due to MinGW bug (feature?), command line params starting with leading /, are expanded by the shell to C:/path/to/mingw/..
+# In order to avoid it, I used cmd //c "originalcommand" in attest(). Remove cmd //c and quotes if you're on real UNIX env.
 
 # Launch attester with default config.
 # Usage:
@@ -16,7 +19,7 @@ alias attester='npm run-script attester'
 attest() {
     if [ $# -eq 1 ] ; then
         classpath=$(_filenameToClassPath $1)
-        node node_modules/attester/bin/attester.js --phantomjs-instances 1 --config.resources./ src --config.resources./test test --config.tests.aria-templates.classpaths.includes ${classpath}
+        cmd //c "node node_modules/attester/bin/attester.js --phantomjs-instances 1 --config.tests.aria-templates.extraScripts /aria/css/atskin.js --config.resources./ src --config.resources./test test --config.tests.aria-templates.classpaths.includes ${classpath}"
     else
         echo "Please provide a classpath."
     fi
