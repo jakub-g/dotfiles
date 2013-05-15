@@ -12,6 +12,7 @@ source ~/unix.profile
 source ~/unix-mingw.profile
 source ~/win-mingw.profile
 source ~/git.profile
+source ~/github.profile
 source ~/ariatemplates.profile
 
 # pull dot profile files from ~ to cwd
