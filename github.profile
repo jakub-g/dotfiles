@@ -23,7 +23,7 @@ nextiss () {
 
     # ...if empty, use the ones from the Git repo I'm on...
     # look for upstream and origin, sort reverse to have upstream first if present
-    local UPSTREAMDATA=`git remote -v | grep "upstream\|origin" | sort -r | head -1 | perl -l -ne '/github.com(:|\/)([a-zA-Z0-9\-]+)\/([a-zA-Z0-9\-]+)\.git/ && print $2." ".$3'`
+    local UPSTREAMDATA=`git remote -v | grep "upstream\|origin" | sort -r | head -1 | perl -l -ne '/github.com(:|\/)([a-zA-Z0-9\-]+)\/([a-zA-Z0-9\-]+)(?:\.git)?/ && print $2." ".$3'`
 
     : ${T_GHUSER:=`echo "$UPSTREAMDATA" | cut -d ' ' -f1`}
     : ${T_GHREPO:=`echo "$UPSTREAMDATA" | cut -d ' ' -f2`}
@@ -66,7 +66,7 @@ pullreq () {
 
     # ...if empty, use the ones from the Git repo I'm on...
     # look for upstream and origin, sort reverse to have upstream first if present
-    local UPSTREAMDATA=`git remote -v | grep "upstream\|origin" | sort -r | head -1 | perl -l -ne '/github.com[:\/]([a-zA-Z0-9\-]+)\/([a-zA-Z0-9\-]+)\.git/ && print $1." ".$2'`
+    local UPSTREAMDATA=`git remote -v | grep "upstream\|origin" | sort -r | head -1 | perl -l -ne '/github.com[:\/]([a-zA-Z0-9\-]+)\/([a-zA-Z0-9\-]+)(?:\.git)?/ && print $1." ".$2'`
 
     : ${T_GHUSER:=`echo "$UPSTREAMDATA" | cut -d ' ' -f1`}
     : ${T_GHREPO:=`echo "$UPSTREAMDATA" | cut -d ' ' -f2`}
@@ -78,10 +78,10 @@ pullreq () {
     # read Github username from env...
     local T_GHME=$GHME
     # ...or if empty, infer from current repo "origin" remote
-    : ${T_GHME:=`git remote -v | grep "origin" | head -1 | perl -l -ne '/github.com[:\/]([a-zA-Z0-9\-]+)\/([a-zA-Z0-9\-]+)\.git/ && print $1'`}
+    : ${T_GHME:=`git remote -v | grep "origin" | head -1 | perl -l -ne '/github.com[:\/]([a-zA-Z0-9\-]+)\/([a-zA-Z0-9\-]+)(?:\.git)?/ && print $1'`}
 
     local CURRBRANCH=$(git rev-parse --abbrev-ref HEAD)
-    local URL="https://github.com/$T_GHUSER/$T_GHREPO/pull/new/$T_GHREPO:master...$T_GHME:$CURRBRANCH"
+    local URL="https://github.com/$T_GHUSER/$T_GHREPO/pull/new/$T_GHUSER:master...$T_GHME:$CURRBRANCH"
 
     if [ -n `which python` ]; then
       # is there any cleaner way to launch the default browser that'll work in MinGW?
