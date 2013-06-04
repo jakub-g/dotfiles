@@ -1,0 +1,16 @@
+[http]
+	sslVerify = false
+[user]
+	name = jakub-g
+	email = jakub.gieryluk@amadeus.com
+[color "diff"]
+	old = white red
+[color "status"]
+	changed = white red
+[core]
+	whitespace = cr-at-eol
+	autocrlf = true
+[merge]
+	conflictstyle = diff3
+[push]
+	default = simple
