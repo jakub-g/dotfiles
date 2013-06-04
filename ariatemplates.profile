@@ -25,6 +25,24 @@ attest() {
     fi
 }
 
+chattest() {
+    if [ $# -eq 1 ] ; then
+        classpath=$(_filenameToClassPath $1)
+        cmd //c "node node_modules/attester/bin/attester.js --port 7777 --browsers.browserName Chrome --config.tests.aria-templates.extraScripts /aria/css/atskin.js --config.resources./ src --config.resources./test test --config.tests.aria-templates.classpaths.includes ${classpath}"
+    else
+        echo "Please provide a classpath."
+    fi
+}
+
+fxattest() {
+    if [ $# -eq 1 ] ; then
+        classpath=$(_filenameToClassPath $1)
+        cmd //c "node node_modules/attester/bin/attester.js --port 7777 --browsers.browserName Firefox --config.tests.aria-templates.extraScripts /aria/css/atskin.js --config.resources./ src --config.resources./test test --config.tests.aria-templates.classpaths.includes ${classpath}"
+    else
+        echo "Please provide a classpath."
+    fi
+}
+
 fxtest() {
     if [ $# -eq 1 ] ; then
         classpath=$(_filenameToClassPath $1)
