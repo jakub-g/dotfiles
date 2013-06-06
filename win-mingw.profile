@@ -3,11 +3,13 @@
 # Open Notepad++ from MINGW!
 # Usage:
 #  np foo.txt
-alias np='/c/Program\ Files/Notepad++/notepad++.exe'
+test -f "/c/Program Files (x86)/Notepad++/notepad++.exe" && alias np='/c/Program\ Files\ \(x86\)/Notepad++/notepad++.exe'
+test -f "/c/Program Files/Notepad++/notepad++.exe"       && alias np='/c/Program\ Files/Notepad++/notepad++.exe'
 alias n++='np'
 
-# Open Firefox from shell
-alias firefox='/c/Program\ Files/Mozilla\ Firefox/firefox.exe'
+# Open Firefox from shell.
+test -f "/c/Program Files (x86)/Mozilla Firefox/firefox.exe" && alias firefox='/c/Program\ Files\ \(x86\)/Mozilla\ Firefox/firefox.exe'
+test -f "/c/Program Files/Mozilla Firefox/firefox.exe"       && alias firefox='/c/Program\ Files/Mozilla\ Firefox/firefox.exe'
 alias fx='firefox'
 
 # Open IE from shell
