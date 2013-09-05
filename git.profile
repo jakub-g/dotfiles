@@ -152,6 +152,9 @@ alias gunstage='git reset HEAD'
 # Get rid of the last commit.
 alias gdrop='git reset --hard HEAD^'
 
+# Discard current, uncommitted changes
+alias gdiscard='git reset --hard HEAD'
+
 # ======================================================
 # committing
 # ======================================================
@@ -253,9 +256,9 @@ complete -F _gitbranches gdel
 # ======================================================
 # bisecting
 # ======================================================
-alias gbistart='git bisect start'
-alias gbigood='git bisect good'
-alias gbibad='git bisect bad'
+alias gbisect='git bisect start'
+alias good='git bisect good'
+alias bad='git bisect bad'
 alias gbiend='git bisect reset'
 
 # ======================================================
