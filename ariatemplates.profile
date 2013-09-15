@@ -10,6 +10,12 @@
 #  attester
 alias attester='npm run-script attester'
 
+# store some strings for reuse
+sharedConf='--config.tests.aria-templates.extraScripts /aria/css/atskin.js --config.resources./ src --config.resources./test test'
+classpathConfPrefix='--config.tests.aria-templates.classpaths.includes'
+attesterPath='node node_modules/attester/bin/attester.js' # assuming this is done in AT directory, using it's npm-installed Attester
+attesterSlaveUrl="http://localhost:7777/__attester__/slave.html"
+
 # Launch attester passing one specific test classpath.
 # Usage:
 #  attest test.aria.widgets.form.autocomplete.issue315.OpenDropDownFromButtonTest
@@ -19,53 +25,75 @@ alias attester='npm run-script attester'
 attest() {
     if [ $# -eq 1 ] ; then
         classpath=$(_filenameToClassPath $1)
-        cmd //c "node node_modules/attester/bin/attester.js --phantomjs-instances 1 --config.tests.aria-templates.extraScripts /aria/css/atskin.js --config.resources./ src --config.resources./test test --config.tests.aria-templates.classpaths.includes ${classpath}"
+        cmd //c "${attesterPath} --phantomjs-instances 1 ${sharedConf} ${classpathConfPrefix} ${classpath}"
     else
         echo "Please provide a classpath."
     fi
 }
 
-chattest() {
-    if [ $# -eq 1 ] ; then
-        classpath=$(_filenameToClassPath $1)
-        cmd //c "node node_modules/attester/bin/attester.js --port 7777 --browsers.browserName Chrome --config.tests.aria-templates.extraScripts /aria/css/atskin.js --config.resources./ src --config.resources./test test --config.tests.aria-templates.classpaths.includes ${classpath}"
-    else
-        echo "Please provide a classpath."
-    fi
-}
+# chattest and fxattest do the following:
+# 1. Start a new Attester campaign with the specific classpath to be executed, and the provided browser expected to connect
+# 2. Open the Attester URL in the given browser.
+# Note that since both of those things are done asynchronously, the URL might hit 40
+# if Attester's server didn't manage to boot up by the time the browser tries to hit the URL. Just F5 then to reload.
 
 fxattest() {
-    if [ $# -eq 1 ] ; then
-        classpath=$(_filenameToClassPath $1)
-        cmd //c "node node_modules/attester/bin/attester.js --port 7777 --browsers.browserName Firefox --config.tests.aria-templates.extraScripts /aria/css/atskin.js --config.resources./ src --config.resources./test test --config.tests.aria-templates.classpaths.includes ${classpath}"
-    else
-        echo "Please provide a classpath."
-    fi
+    _browserattest $# "$1" "Firefox" &
+    firefox ${attesterSlaveUrl} &
+}
+chattest() {
+    _browserattest $# "$1" "Chrome" &
+    chrome ${attesterSlaveUrl} &
+}
+ieattest() {
+    _browserattest $# "$1" "IE" &
+    iexplore ${attesterSlaveUrl} &
 }
 
 fxtest() {
-    if [ $# -eq 1 ] ; then
-        classpath=$(_filenameToClassPath $1)
-        url=$(_testUrlFromClasspath $classpath)
-        firefox $url &
-    else
-        echo "Please provide a classpath."
-    fi
-}
-ietest() {
-    if [ $# -eq 1 ] ; then
-        classpath=$(_filenameToClassPath $1)
-        url=$(_testUrlFromClasspath $classpath)
-        ie $url &
-    else
-        echo "Please provide a classpath."
-    fi
+    _browsertest $# "$1" "firefox"
 }
 chtest() { # you'll need to add (at least on Windows) the folder of chrome executable to the system's PATH
-    if [ $# -eq 1 ] ; then
-        classpath=$(_filenameToClassPath $1)
+    _browsertest $# "$1" "chrome"
+}
+ietest() {
+    _browsertest $# "$1" "iexplore"
+}
+
+_browsertest() {
+    # $1: no.of params passed to previous func,
+    # $2: classpath,
+    # $3: browsername (executable)
+
+    browsername=$3
+    # this is rather ugly, but I haven't found a better way to read the alias...
+    browserexec=$(type "$browsername" | sed "s/$browsername is aliased to//" | sed "s/^ *\|\`\|'//g")
+    if [ $1 -eq 1 ] ; then
+        classpath=$(_filenameToClassPath $2)
         url=$(_testUrlFromClasspath $classpath)
-        chrome $url &
+        if [[ "$browserexec" = "/"* ]] ; then
+            # /c/Program\ Files/Mozilla\ Firefox/firefox.exe
+            # can't run it directly here like this neither unquoted nor quoted in MinGW, need to remove backlashes
+            browserexec=${browserexec//\\/} # remove backslashes...
+            "$browserexec" $url &
+        else
+            # sth like C:\Documents and Settings\qbk\Local Settings\Application Data\Google\Chrome\Application\chrome.exe
+            # this can be run, quoted, by MinGW
+            "$browserexec" $url &
+        fi
+    else
+        echo "Please provide a classpath."
+    fi
+}
+
+_browserattest() {
+    # $1: no.of params passed to previous func,
+    # $2: classpath,
+    # $3: browsername (attester-expected)
+
+    if [ $1 -eq 1 ] ; then
+        classpath=$(_filenameToClassPath $2)
+        cmd //c "${attesterPath} --port 7777 --browsers.browserName $3 ${sharedConf} ${classpathConfPrefix} ${classpath}"
     else
         echo "Please provide a classpath."
     fi

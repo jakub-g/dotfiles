@@ -12,6 +12,9 @@ _gitbranches()
     COMPREPLY=( $(compgen -W "${opts}" -- $cur) )
 }
 
+# Go up into top directory of a Git project.
+alias gogit='_tmp=$(git rev-parse --show-cdup); if [[ -z $_tmp ]]; then _tmp="."; fi; cd $_tmp' # if already in git dir,empty string is returned
+
 # ======================================================
 # diff
 # ======================================================
