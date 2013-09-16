@@ -182,6 +182,9 @@ alias gamendall='gaaa && gamend'
 # Amend the last commit: set date to current date
 alias gamenddate='git commit --amend --date="$(date -R)"'
 
+# Amend the last commit: set the author
+alias gamendauth='git commit --amend --author' # should be passed here, as "foo <foo@foo>"
+
 # Cherry-pick
 alias gcp='git cherry-pick'
 complete -F _gitbranches gcp
@@ -218,6 +221,9 @@ gri(){ # e.g "gri 4"
         git rebase -i $1
     fi
 }
+
+# Rebase on top of master
+alias gremaster='git rebase master'
 
 # ======================================================
 # pushing
