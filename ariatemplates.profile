@@ -11,7 +11,7 @@
 alias attester='npm run-script attester'
 
 # store some strings for reuse
-sharedConf='--config.tests.aria-templates.extraScripts /aria/css/atskin.js --config.resources./ src --config.resources./test test'
+sharedConf='--predictable-urls true --shutdown-on-campaign-end false --config.tests.aria-templates.extraScripts /aria/css/atskin.js --config.resources./ src --config.resources./test test'
 classpathConfPrefix='--config.tests.aria-templates.classpaths.includes'
 attesterPath='node node_modules/attester/bin/attester.js' # assuming this is done in AT directory, using it's npm-installed Attester
 attesterSlaveUrl="http://localhost:7777/__attester__/slave.html"
