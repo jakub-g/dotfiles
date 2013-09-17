@@ -89,6 +89,12 @@ alias gbh='gb | head'
 # Display recent local branches - short (only names) (sorted by last commit date)
 alias gbs='git for-each-ref --sort=-committerdate --format="%(refname:short)" refs/heads/'
 
+# Display just the name of the last branch committed to
+alias gblast='git for-each-ref --sort=-committerdate --format="%(refname:short)" refs/heads/ | head -1'
+
+# Checkout the last branch committed to
+alias gotolast='goto $(gblast)'
+
 # Display local branches (default sorting by name)
 alias gbr='git branch'
 
