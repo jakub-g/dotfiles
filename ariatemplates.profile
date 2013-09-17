@@ -33,21 +33,30 @@ attest() {
 
 # chattest and fxattest do the following:
 # 1. Start a new Attester campaign with the specific classpath to be executed, and the provided browser expected to connect
-# 2. Open the Attester URL in the given browser.
+# 2. If -o is passed at the end: open the Attester URL in the given browser.
 # Note that since both of those things are done asynchronously, the URL might hit 40
 # if Attester's server didn't manage to boot up by the time the browser tries to hit the URL. Just F5 then to reload.
 
 fxattest() {
     _browserattest $# "$1" "Firefox" &
-    firefox ${attesterSlaveUrl} &
+    if [ "$2" == "-o" ]; then
+        sleep 1
+        firefox ${attesterSlaveUrl} &
+    fi
 }
 chattest() {
     _browserattest $# "$1" "Chrome" &
-    chrome ${attesterSlaveUrl} &
+    if [ "$2" == "-o" ]; then
+        sleep 1
+        chrome ${attesterSlaveUrl} &
+    fi
 }
 ieattest() {
     _browserattest $# "$1" "IE" &
-    iexplore ${attesterSlaveUrl} &
+    if [ "$2" == "-o" ]; then
+        sleep 1
+        iexplore ${attesterSlaveUrl} &
+    fi
 }
 
 fxtest() {
@@ -91,7 +100,7 @@ _browserattest() {
     # $2: classpath,
     # $3: browsername (attester-expected)
 
-    if [ $1 -eq 1 ] ; then
+    if [ $1 -eq 1 ] || [ $1 -eq 2 ] ; then
         classpath=$(_filenameToClassPath $2)
         cmd //c "${attesterPath} --port 7777 --browsers.browserName $3 ${sharedConf} ${classpathConfPrefix} ${classpath}"
     else
