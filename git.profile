@@ -13,7 +13,7 @@ _gitbranches()
 }
 
 # Go up into top directory of a Git project.
-alias gogit='_tmp=$(git rev-parse --show-cdup); if [[ -z $_tmp ]]; then _tmp="."; fi; cd $_tmp' # if already in git dir,empty string is returned
+alias gogit='cd "./"$(git rev-parse --show-cdup)' # if already in git dir,empty string is returned
 
 # ======================================================
 # diff
@@ -91,6 +91,9 @@ alias gbs='git for-each-ref --sort=-committerdate --format="%(refname:short)" re
 
 # Display just the name of the last branch committed to
 alias gblast='git for-each-ref --sort=-committerdate --format="%(refname:short)" refs/heads/ | head -1'
+
+# Display the name of the newest tag
+alias gtaglast='git describe --abbrev=0'
 
 # Checkout the last branch committed to
 alias gotolast='goto $(gblast)'
