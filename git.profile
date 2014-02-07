@@ -36,6 +36,12 @@ complete -F _gitbranches gsh
 alias gshs='git show --stat'
 complete -F _gitbranches gshs
 
+# Same as gshs, but also shows committer (not only author)
+alias gshmeta='git show --stat --pretty=full'
+
+# Same as gsh + Instead of displaying full line deletions, displays colored inline changes.
+alias gshmin='git show --color-words'
+
 # Instead of displaying full line deletions, displays colored inline changes.
 alias gdmin='git diff --color-words'
 
