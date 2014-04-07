@@ -121,7 +121,7 @@ fastpull() {
     local PULLNO=$(nextiss)
     echo -e "$PULLNO" # seems the returned value is not displayed in bash
 
-    _echocyan "Amending the Git commit...";
+    _echocyan "Amending the Git commit: replacing ## with #$PULLNO...";
     COMMIT_MSG=$(git log -1 --pretty=%B)
     COMMIT_MSG=$(echo "$COMMIT_MSG" | sed -r "s/##/#$PULLNO/g")
     git commit --amend -m "$COMMIT_MSG"
