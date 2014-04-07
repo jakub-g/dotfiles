@@ -40,11 +40,25 @@ nextiss () {
 
     local GHBASEURL="https://api.github.com/repos/$T_GHUSER/$T_GHREPO/issues?sort=created&direction=desc"
     _echoerr '.....'
-    local GH1=$(curl -s $GHAUTH "$GHBASEURL&state=closed" | underscore extract "0.number" 2>/dev/null)
+
+    local GH1=$(curl -s $GHAUTH "$GHBASEURL&state=closed")
+    local ERRMSG=$(echo "$GH1" | underscore extract message 2>/dev/null)
+    if [ -n "$ERRMSG" ]; then
+        echo -e "\n$ERRMSG"
+        return
+    fi
+    GH1=$(echo "$GH1" | underscore extract "0.number" 2>/dev/null)
     _echoerr '.....'
     sleep 1
+
     _echoerr '.....'
-    local GH2=$(curl -s $GHAUTH "$GHBASEURL&state=open"   | underscore extract "0.number" 2>/dev/null)
+    local GH2=$(curl -s $GHAUTH "$GHBASEURL&state=open")
+    local ERRMSG=$(echo "$GH2" | underscore extract message 2>/dev/null)
+    if [ -n "$ERRMSG" ]; then
+        echo -e "\n$ERRMSG"
+        return
+    fi
+    GH2=$(echo "$GH2" | underscore extract "0.number" 2>/dev/null)
     # in case no open/closed issues found, assume 0
     : ${GH1:=0}
     : ${GH2:=0}
