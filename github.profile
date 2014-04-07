@@ -1,14 +1,9 @@
 #!/bin/bash
 
-# Setting globals if not present in environment
-: ${GHME:="jakub-g"}
-: ${GHUSER:="ariatemplates"}
-: ${GHREPO:="ariatemplates"}
-
 # Print the number of the next issue of given repo.
 # Usage:
 #  nextiss <username> <reponame>
-# If omitted, they default to the $GHUSER / $GHREPO.
+# If omitted, they default to the $GHUSER / $GHREPO from shell environment.
 #
 # Requires underscore: npm install -g underscore-cli
 nextiss () {
@@ -48,8 +43,9 @@ nextiss () {
     echo "$GHNEXT" # write to stdout, so it's a return value at the same time
 }
 
-# Open the browser to create a pull request. The pull request is opened from <GHME>:<CURRENTBRANCH>.
+# Open the browser to create a pull request. The pull request is opened from $GHME:<CURRENTBRANCH>.
 # In order for current branch detection to work, you have to invoke this when in your Git repo.
+# $GHME is read from shell environment, or if empty, inferred from "origin" git remote URL.
 #
 # Usage:
 #  pullreq <username> <reponame>
