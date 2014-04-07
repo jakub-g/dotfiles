@@ -7,7 +7,7 @@
 #
 # Requires underscore: npm install -g underscore-cli
 nextiss () {
-    if [ -z "`which underscore`" ]; then
+    if [ -z "$(which underscore)" ]; then
         echo "nextiss() requires underscore-cli to parse JSON: npm install -g underscore-cli"
         return
     fi
@@ -18,10 +18,10 @@ nextiss () {
 
     # ...if empty, use the ones from the Git repo I'm on...
     # look for upstream and origin, sort reverse to have upstream first if present
-    local UPSTREAMDATA=`git remote -v | grep "upstream\|origin" | sort -r | head -1 | perl -l -ne '/github.com(:|\/)([a-zA-Z0-9\-]+)\/([a-zA-Z0-9\-]+)(?:\.git)?/ && print $2." ".$3'`
+    local UPSTREAMDATA=$(git remote -v | grep "upstream\|origin" | sort -r | head -1 | perl -l -ne '/github.com(:|\/)([a-zA-Z0-9\-]+)\/([a-zA-Z0-9\-]+)(?:\.git)?/ && print $2." ".$3')
 
-    : ${T_GHUSER:=`echo "$UPSTREAMDATA" | cut -d ' ' -f1`}
-    : ${T_GHREPO:=`echo "$UPSTREAMDATA" | cut -d ' ' -f2`}
+    : ${T_GHUSER:=$(echo "$UPSTREAMDATA" | cut -d ' ' -f1)}
+    : ${T_GHREPO:=$(echo "$UPSTREAMDATA" | cut -d ' ' -f2)}
 
     # ...if still empty, read from globals
     : ${T_GHUSER:=$GHUSER}
@@ -29,11 +29,11 @@ nextiss () {
 
     local GHBASEURL="https://api.github.com/repos/$T_GHUSER/$T_GHREPO/issues?sort=created&direction=desc"
     _echoerr '.....'
-    local GH1=`curl -s "$GHBASEURL&state=closed" | underscore extract "0.number" 2>/dev/null`
+    local GH1=$(curl -s "$GHBASEURL&state=closed" | underscore extract "0.number" 2>/dev/null)
     _echoerr '.....'
     sleep 1
     _echoerr '.....'
-    local GH2=`curl -s "$GHBASEURL&state=open"   | underscore extract "0.number" 2>/dev/null`
+    local GH2=$(curl -s "$GHBASEURL&state=open"   | underscore extract "0.number" 2>/dev/null)
     # in case no open/closed issues found, assume 0
     : ${GH1:=0}
     : ${GH2:=0}
@@ -62,10 +62,10 @@ pullreq () {
 
     # ...if empty, use the ones from the Git repo I'm on...
     # look for upstream and origin, sort reverse to have upstream first if present
-    local UPSTREAMDATA=`git remote -v | grep "upstream\|origin" | sort -r | head -1 | perl -l -ne '/github.com[:\/]([a-zA-Z0-9\-]+)\/([a-zA-Z0-9\-]+)(?:\.git)?/ && print $1." ".$2'`
+    local UPSTREAMDATA=$(git remote -v | grep "upstream\|origin" | sort -r | head -1 | perl -l -ne '/github.com[:\/]([a-zA-Z0-9\-]+)\/([a-zA-Z0-9\-]+)(?:\.git)?/ && print $1." ".$2')
 
-    : ${T_GHUSER:=`echo "$UPSTREAMDATA" | cut -d ' ' -f1`}
-    : ${T_GHREPO:=`echo "$UPSTREAMDATA" | cut -d ' ' -f2`}
+    : ${T_GHUSER:=$(echo "$UPSTREAMDATA" | cut -d ' ' -f1)}
+    : ${T_GHREPO:=$(echo "$UPSTREAMDATA" | cut -d ' ' -f2)}
 
     # ...if still empty, read from globals
     : ${T_GHUSER:=$GHUSER}
@@ -74,15 +74,15 @@ pullreq () {
     # read Github username from env...
     local T_GHME=$GHME
     # ...or if empty, infer from current repo "origin" remote
-    : ${T_GHME:=`git remote -v | grep "origin" | head -1 | perl -l -ne '/github.com[:\/]([a-zA-Z0-9\-]+)\/([a-zA-Z0-9\-]+)(?:\.git)?/ && print $1'`}
+    : ${T_GHME:=$(git remote -v | grep "origin" | head -1 | perl -l -ne '/github.com[:\/]([a-zA-Z0-9\-]+)\/([a-zA-Z0-9\-]+)(?:\.git)?/ && print $1')}
 
     local CURRBRANCH=$(git rev-parse --abbrev-ref HEAD)
     local URL="https://github.com/$T_GHUSER/$T_GHREPO/pull/new/$T_GHUSER:master...$T_GHME:$CURRBRANCH"
 
-    if [ -n `which python` ]; then
+    if [ -n $(which python) ]; then
       # is there any cleaner way to launch the default browser that'll work in MinGW?
       python -mwebbrowser $URL &
-    elif [ -n `which chrome` ]; then
+    elif [ -n $(which chrome) ]; then
       chrome $URL &
     else
       firefox $URL &
