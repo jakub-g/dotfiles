@@ -5,6 +5,12 @@
 #  nextiss <username> <reponame>
 # If omitted, they default to the $GHUSER / $GHREPO from shell environment.
 #
+# Note that's it's very easy to reach Github API limits as unauthenticated user
+# (especially in a BigCorp-over-single-IP environments). Hence you should probably obtain
+# a token https://github.com/settings/tokens/new with just readonly permissions (uncheck
+# all the checkboxes) and add it to your `~/.profile` file as GH_READONLY_ACCESS_TOKEN=...
+# If that variable is available in the environment, the request will be authorized.
+
 # Requires underscore: npm install -g underscore-cli
 nextiss () {
     if [ -z "$(which underscore)" ]; then
@@ -27,13 +33,18 @@ nextiss () {
     : ${T_GHUSER:=$GHUSER}
     : ${T_GHREPO:=$GHREPO}
 
+    local GHAUTH=""
+    if [ -n "$GH_READONLY_ACCESS_TOKEN" ]; then
+        GHAUTH="-u $GH_READONLY_ACCESS_TOKEN:x-oauth-basic"
+    fi
+
     local GHBASEURL="https://api.github.com/repos/$T_GHUSER/$T_GHREPO/issues?sort=created&direction=desc"
     _echoerr '.....'
-    local GH1=$(curl -s "$GHBASEURL&state=closed" | underscore extract "0.number" 2>/dev/null)
+    local GH1=$(curl -s $GHAUTH "$GHBASEURL&state=closed" | underscore extract "0.number" 2>/dev/null)
     _echoerr '.....'
     sleep 1
     _echoerr '.....'
-    local GH2=$(curl -s "$GHBASEURL&state=open"   | underscore extract "0.number" 2>/dev/null)
+    local GH2=$(curl -s $GHAUTH "$GHBASEURL&state=open"   | underscore extract "0.number" 2>/dev/null)
     # in case no open/closed issues found, assume 0
     : ${GH1:=0}
     : ${GH2:=0}
