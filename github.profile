@@ -2,7 +2,7 @@
 
 # Print the number of the next issue of given repo.
 # Usage:
-#  nextiss <username> <reponame>
+#  nextiss [<username> [<reponame>]]
 # If omitted, they default to the $GHUSER / $GHREPO from shell environment.
 #
 # Note that's it's very easy to reach Github API limits as unauthenticated user
@@ -10,12 +10,12 @@
 # a token https://github.com/settings/tokens/new with just readonly permissions (uncheck
 # all the checkboxes) and add it to your `~/.profile` file as GH_READONLY_ACCESS_TOKEN=...
 # If that variable is available in the environment, the request will be authorized.
-
-# Requires underscore: npm install -g underscore-cli
+#
+# Requires underscore to parse JSON: npm install -g underscore-cli
 nextiss () {
     if [ -z "$(which underscore)" ]; then
-        echo "nextiss() requires underscore-cli to parse JSON: npm install -g underscore-cli"
-        return
+        _echoerr "nextiss() requires underscore-cli to parse JSON: npm install -g underscore-cli"
+        return 1
     fi
 
     # read params passed to the function...
@@ -44,8 +44,8 @@ nextiss () {
     local GH1=$(curl -s $GHAUTH "$GHBASEURL&state=closed")
     local ERRMSG=$(echo "$GH1" | underscore extract message 2>/dev/null)
     if [ -n "$ERRMSG" ]; then
-        echo -e "\n$ERRMSG"
-        return
+        _echoerr "\n$ERRMSG"
+        return 1
     fi
     GH1=$(echo "$GH1" | underscore extract "0.number" 2>/dev/null)
     _echoerr '.....'
@@ -55,8 +55,8 @@ nextiss () {
     local GH2=$(curl -s $GHAUTH "$GHBASEURL&state=open")
     local ERRMSG=$(echo "$GH2" | underscore extract message 2>/dev/null)
     if [ -n "$ERRMSG" ]; then
-        echo -e "\n$ERRMSG"
-        return
+        _echoerr "\n$ERRMSG"
+        return 1
     fi
     GH2=$(echo "$GH2" | underscore extract "0.number" 2>/dev/null)
     # in case no open/closed issues found, assume 0
@@ -119,7 +119,10 @@ pullreq () {
 fastpull() {
     _echocyan "Retrieving data from GitHub..."
     local PULLNO=$(nextiss)
-    echo -e "$PULLNO" # seems the returned value is not displayed in bash
+    if [ -z "$PULLNO" ]; then # data is output to stdout, error msgs to stderr; empty stdout means error
+        return 1
+    fi
+    echo -e "$PULLNO"      # print pull req no. on success, or an error on failure
 
     _echocyan "Amending the Git commit: replacing ## with #$PULLNO...";
     COMMIT_MSG=$(git log -1 --pretty=%B)
