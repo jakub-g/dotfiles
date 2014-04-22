@@ -8,6 +8,10 @@
 #
 ####################################
 
+export HISTSIZE=4000 HISTFILESIZE=4000
+export HISTCONTROL=ignoredups:erasedups
+export PROMPT_COMMAND='history -a'
+
 source ~/unix.profile
 source ~/unix-mingw.profile
 source ~/win-mingw.profile
