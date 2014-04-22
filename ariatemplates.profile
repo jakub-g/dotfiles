@@ -5,6 +5,9 @@
 # Note: Due to MinGW bug (feature?), command line params starting with leading /, are expanded by the shell to C:/path/to/mingw/..
 # In order to avoid it, I used cmd //c "originalcommand" in attest(). Remove cmd //c and quotes if you're on real UNIX env.
 
+# use npm with different credentials
+alias npmat='npm --userconfig=/d/at.npmrc'
+
 # Launch attester with default config.
 # Usage:
 #  attester
