@@ -10,8 +10,14 @@ alias l='ls'
 # list files in current dir, one file per line, long output
 alias ll='ls -l'
 
+# list all files in current dir, one file per line, long output
+alias lla='ls -la'
+
 # clear screen
 alias cls='clear'
+
+# up one directory
+alias up='cd ..'
 
 # serve current directory on localhost:88 using Python 2/3
 alias serve='python -m SimpleHTTPServer 88'
