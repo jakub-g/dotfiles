@@ -26,18 +26,18 @@ alias gd='git diff'
 alias gdc='git diff --cached'
 
 # Display diff stats (one file per line)
-alias gds='git diff --stat'
+alias gds='git diff --stat --stat-width=140 --stat-name-width=120 --stat-graph-width=20'
 
 # Display code diff of the tip in branch/tag/commit. Shows HEAD if parameterless.
 alias gsh='git show'
 complete -F _gitbranches gsh
 
 # Display diff stats of the tip in branch/tag/commit. Shows HEAD if parameterless.
-alias gshs='git show --stat'
+alias gshs='git show --stat --stat-width=140 --stat-name-width=120 --stat-graph-width=20'
 complete -F _gitbranches gshs
 
 # Same as gshs, but also shows committer (not only author)
-alias gshmeta='git show --stat --pretty=full'
+alias gshmeta='git show --stat --stat-width=140 --stat-name-width=120 --stat-graph-width=20 --pretty=full'
 
 # Same as gsh + Instead of displaying full line deletions, displays colored inline changes.
 alias gshmin='git show --color-words'
