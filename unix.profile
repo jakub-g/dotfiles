@@ -5,19 +5,23 @@
 # ======================================================
 
 # list files in current dir
-alias l='ls'
+alias l='ll'
 
 # list files in current dir, one file per line, long output
-alias ll='ls -l'
+alias ll='ls -l --color'
 
 # list all files in current dir, one file per line, long output
-alias lla='ls -la'
+alias lla='ls -la --color'
 
 # clear screen
 alias cls='clear'
 
 # up one directory
 alias up='cd ..'
+
+alias cd.='cd ..'
+alias cd..='cd ../..'
+alias cd...='cd ../../..'
 
 # serve current directory on localhost:88 using Python 2/3
 alias serve='python -m SimpleHTTPServer 88'

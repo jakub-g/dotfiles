@@ -245,7 +245,7 @@ gri(){ # e.g "gri 4"
 }
 
 # continue rebase
-alias grc='git rebase continue'
+alias grc='git rebase --continue'
 
 # Rebase on top of master
 alias gremaster='git rebase master'
