@@ -18,6 +18,7 @@ source ~/win-mingw.profile
 source ~/git.profile
 source ~/github.profile
 source ~/ariatemplates.profile
+source ~/util.profile
 
 # pull dot profile files from ~ to cwd
 alias dotpull='cp ~/*.profile .'
