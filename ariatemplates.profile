@@ -133,5 +133,5 @@ _filenameToClassPath() {
 
 # @param $1 classpath
 _testUrlFromClasspath() {
-    echo "http://localhost/aria-templates/test/beta.html?dev=true&debug=true&verbose=true&testClasspath=$1"
+    echo "http://localhost/aria-templates-git/test/test.htm?dev=true&debug=true&verbose=true&testClasspath=$1"
 }
