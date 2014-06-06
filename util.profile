@@ -7,7 +7,7 @@ alias todos='cat ~/todo.txt'
 alias todo-clean='echo "" > ~/todo.txt'
 doin() {
     if [ "$#" == "0" ]; then
-        doinls
+        doins
         return
     fi
     echo "- [$(date '+%a %d.%m %Hh%M')] $*" >> ~/doin.txt
