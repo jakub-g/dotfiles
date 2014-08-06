@@ -45,6 +45,13 @@ alias gshmin='git show --color-words'
 # Instead of displaying full line deletions, displays colored inline changes.
 alias gdmin='git diff --color-words'
 
+# Displays files changed in a particular commit.
+# Usage:
+#  gfiles <commit-id>
+#  gfiles HEAD
+alias gfiles='git diff-tree -r --name-only --no-commit-id'
+complete -F _gitbranches gfiles
+
 # ======================================================
 # status
 # ======================================================
@@ -95,6 +102,9 @@ alias gbh='gb | head'
 # Display recent local branches - short (only names) (sorted by last commit date)
 alias gbs='git for-each-ref --sort=-committerdate --format="%(refname:short)" refs/heads/'
 
+# Display just the name of the current branch
+alias gcurrbranch='git rev-parse --abbrev-ref HEAD'
+
 # Display just the name of the last branch committed to
 alias gblast='git for-each-ref --sort=-committerdate --format="%(refname:short)" refs/heads/ | head -1'
 
@@ -141,7 +151,9 @@ complete -F _gitbranches gck
 # updating - from upstream
 # ======================================================
 
-alias gup='git fetch upstream && git rebase upstream/master master'
+alias gup='git fetch upstream && git rebase upstream/master $(gcurrbranch)'
+# Use gupc in favor of gsync when you're in gh-pages etc.
+alias gupc='git fetch upstream && git rebase upstream/$(gcurrbranch) $(gcurrbranch)'
 alias gupf='git stash && gup && git stash pop'
 alias guptag='git fetch --tags upstream'       # tags are not downloaded by default
 
@@ -149,7 +161,9 @@ alias guptag='git fetch --tags upstream'       # tags are not downloaded by defa
 # updating - from origin (syncing)
 # ======================================================
 
-alias gsync='git fetch origin && git rebase origin/master master'
+alias gsync='git fetch origin && git rebase origin/master $(gcurrbranch)'
+# Use gsyncc in favor of gsync when you're in gh-pages etc.
+alias gsyncc='git fetch origin && git rebase origin/$(gcurrbranch) $(gcurrbranch)'
 alias gsyncf='git stash && gsync && git stash pop'
 alias gsynctag='git fetch --tags origin'
 
@@ -198,15 +212,21 @@ alias gamendall='gaaa && gamend'
 alias gamenddate='git commit --amend --date="$(date -R)"'
 
 # Amend the last commit: set the author
+# Usage:
+#  gamendauth "foo <foo@foo>"
 alias gamendauth='git commit --amend --author' # should be passed here, as "foo <foo@foo>"
 
 # Cherry-pick
 alias gcp='git cherry-pick'
 complete -F _gitbranches gcp
 
-# Cherry-pick / back-port the bugfix: append a line that says "(cherry picked from commit ...)"
+# Cherry-pick / back-port the bugfix: appends a line that says "(cherry picked from commit ...)"
 alias gcpx='git cherry-pick -x'
 complete -F _gitbranches gcpx
+
+# Cherry-pick "theirs"
+alias gcptheirs='git cherry-pick -x --strategy recursive -X theirs'
+complete -F _gitbranches gcptheirs
 
 # ======================================================
 # executing pre-commit hook
