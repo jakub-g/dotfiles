@@ -135,3 +135,16 @@ _filenameToClassPath() {
 _testUrlFromClasspath() {
     echo "http://localhost/aria-templates-git/test/test.htm?dev=true&debug=true&verbose=true&testClasspath=$1"
 }
+
+# Format AT files with Spket formatter. Supposing Spket and its config are in /d/bin/spket
+# @param $1 $2 ... filenames
+atformat () {
+    if [ $# -eq 0 ] ; then
+        echo "Usage: atformat file1 [file2] [file3] ... (expecting at least one file name parameter, or a glob like *.js)"
+    else
+        for filename in "$@"
+        do
+            java -cp "/d/bin/spket/jars/*" jsfc.JSFormatter -o /d/bin/spket/SpketFormatter.xml "$filename" "$filename"
+        done
+    fi
+}
