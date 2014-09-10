@@ -133,7 +133,7 @@ _filenameToClassPath() {
 
 # @param $1 classpath
 _testUrlFromClasspath() {
-    echo "http://localhost/aria-templates-git/test/test.htm?dev=true&debug=true&verbose=true&testClasspath=$1"
+    echo "http://localhost/git-aria-templates/test/test.htm?dev=true&debug=true&verbose=true&testClasspath=$1"
 }
 
 # Format AT files with Spket formatter. Supposing Spket and its config are in /d/bin/spket
