@@ -19,6 +19,7 @@ source ~/git.profile
 source ~/github.profile
 source ~/ariatemplates.profile
 source ~/util.profile
+source ~/js.profile
 
 # pull dot profile files from ~ to cwd
 alias dotpull='cp ~/*.profile .'
