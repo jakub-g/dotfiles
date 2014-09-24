@@ -16,6 +16,11 @@ alias lla='ls -la --color'
 # clear screen
 alias cls='clear'
 
+# cat in the reverse order
+alias tac='perl -e "print reverse <>"'
+alias rev='tac'
+alias reverse='tac'
+
 # up one directory
 alias up='cd ..'
 
