@@ -250,6 +250,16 @@ alias ghka="gcam ''"
 alias git-merge-theirs='git merge -X theirs'
 complete -F _gitbranches git-merge-theirs
 
+# Resets to a commit, and squashes all further commit into one
+gsquash-over() {
+    if [ $# -eq 1 ] ; then
+        commit=$1
+        git reset --hard $commit ; git merge --squash HEAD@{1}; git commit
+    else
+        echo -e "Usage: $FUNCNAME <commit>\nDoes hard reset to <commit> and merges all further commits into one"
+    fi
+}
+
 # ======================================================
 # rebasing
 # ======================================================
