@@ -228,6 +228,10 @@ complete -F _gitbranches gcpx
 alias gcptheirs='git cherry-pick -x --strategy recursive -X theirs'
 complete -F _gitbranches gcptheirs
 
+# Cherry-pick discarding EOL changes
+alias gcpeol='git cherry-pick --strategy=recursive --strategy-option=renormalize'
+complete -F _gitbranches gcpeol
+
 # ======================================================
 # executing pre-commit hook
 # ======================================================
