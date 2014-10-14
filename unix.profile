@@ -23,10 +23,14 @@ alias reverse='tac'
 
 # up one directory
 alias up='cd ..'
+alias upp='cd ../..'
+alias uppp='cd ../../..'
+alias upppp='cd ../../../..'
 
 alias cd.='cd ..'
 alias cd..='cd ../..'
 alias cd...='cd ../../..'
+alias cd....='cd ../../../..'
 
 # serve current directory on localhost:88 using Python 2/3
 alias serve='python -m SimpleHTTPServer 88'
