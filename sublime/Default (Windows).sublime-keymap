@@ -1,0 +1,10 @@
+[
+	{ "keys": ["ctrl+tab"], "command": "next_view" },
+	{ "keys": ["ctrl+shift+tab"], "command": "prev_view" },
+	{ "keys": ["ctrl+shift+r"], "command": "chain", "args": {
+		"commands" : [["focus_side_bar"], ["reveal_in_side_bar"]]
+	}},
+	{ "keys": ["ctrl+shift+s"], "command": "chain", "args": {
+		"commands" : [["delete_trailing_spaces"], ["save"]]
+	}},
+]
