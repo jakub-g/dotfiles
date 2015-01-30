@@ -19,6 +19,8 @@ alias gogit='cd "./"$(git rev-parse --show-cdup)' # if already in git dir,empty 
 # diff
 # ======================================================
 
+alias gitk='gitk &'
+
 # Display diff code
 alias gd='git diff'
 
@@ -69,18 +71,18 @@ alias gss='git status -s'
 # Display flat log. h/his like history.
 # Usage: gh (use ghm for more items)
 alias ghis='ghm | cat' # it displays in less even if is short enough, thus cat
-alias gh='ghis'
+alias gh='ghiss'
 
 # Like gh, if you want to display more items.
 # Usage:
 #  ghm -20
-alias ghm='git log --format="%C(cyan)%cd%Creset %C(yellow)%h%Creset %s %Cgreen%an%Creset %n%C(black bold)%b%Creset" --date=short -10'
+alias ghm='git log --format="%C(cyan)%cd%Creset %C(yellow)%h%Creset %s %Cgreen%an%Creset %n%C(black bold)%b%Creset" --date=short -20'
 
 # Display flat short log.
 # Usage:
 #  ghiss
 #  ghiss -20
-alias ghiss='git log --oneline -10'
+alias ghiss='git log --oneline -20'
 
 # Various non-flat log versions
 alias gl='git log -5'
@@ -161,7 +163,8 @@ alias guptag='git fetch --tags upstream'       # tags are not downloaded by defa
 # updating - from origin (syncing)
 # ======================================================
 
-alias gsync='git fetch origin && git rebase origin/master $(gcurrbranch)'
+alias gf='git fetch'
+alias gsync='git fetch origin && git rebase origin/$(gcurrbranch) $(gcurrbranch) && git rebase origin/master master && git rebase master'
 # Use gsyncc in favor of gsync when you're in gh-pages etc.
 alias gsyncc='git fetch origin && git rebase origin/$(gcurrbranch) $(gcurrbranch)'
 alias gsyncf='git stash && gsync && git stash pop'
