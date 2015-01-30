@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Print clipboard contents
+alias showclip='cat /dev/clipboard'
+# Go to the folder specified in the clipboard
+alias gotoclip='cd "$(cat /dev/clipboard)"'
+
 # Open Notepad++ from MINGW!
 # Usage:
 #  np foo.txt
