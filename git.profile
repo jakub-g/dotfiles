@@ -122,6 +122,19 @@ alias gbr='git branch'
 # Display local and remote branches
 alias gbra='git branch -a'
 
+# Checks if a local branch exists. Returns 0 or 1 exit code
+# Usage:
+#  gbrexists master
+gbrexists() {
+  git show-ref --verify --quiet "refs/heads/$1"
+}
+# Checks if a remote branch exists. Returns 0 or 1 exit code
+# Usage:
+#  gbrexistsRemote "origin/master"
+gbrexistsRemote() {
+  git show-ref --verify --quiet "refs/remotes/$1"
+}
+
 # ======================================================
 # branches - switching
 # ======================================================
@@ -164,7 +177,20 @@ alias guptag='git fetch --tags upstream'       # tags are not downloaded by defa
 # ======================================================
 
 alias gf='git fetch'
-alias gsync='git fetch origin && git rebase origin/$(gcurrbranch) $(gcurrbranch) && git rebase origin/master master && git rebase master'
+gsync() {
+	local CURR_BRANCH=$(gcurrbranch)
+	git fetch origin
+
+	# rebase current local branch on top of origin tracking branch
+	if (gbrexistsRemote "origin/${CURR_BRANCH}") ; then
+	  git rebase origin/${CURR_BRANCH} ${CURR_BRANCH}
+    fi
+
+	# additionally, rebase local master on top of origin master, if applicable
+	if (gbrexistsRemote "origin/master" && gbrexists "master") ; then
+	  git rebase origin/master master
+    fi
+}
 # Use gsyncc in favor of gsync when you're in gh-pages etc.
 alias gsyncc='git fetch origin && git rebase origin/$(gcurrbranch) $(gcurrbranch)'
 alias gsyncf='git stash && gsync && git stash pop'
