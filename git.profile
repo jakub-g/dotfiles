@@ -41,6 +41,9 @@ complete -F _gitbranches gshs
 # Same as gshs, but also shows committer (not only author)
 alias gshmeta='git show --stat --stat-width=140 --stat-name-width=120 --stat-graph-width=20 --pretty=full'
 
+# Same as gshmeta but ignores EOL changes
+alias gshmetamin='gshmeta --ignore-space-at-eol'
+
 # Same as gsh + Instead of displaying full line deletions, displays colored inline changes.
 alias gshmin='git show --color-words'
 
@@ -53,6 +56,13 @@ alias gdmin='git diff --color-words'
 #  gfiles HEAD
 alias gfiles='git diff-tree -r --name-only --no-commit-id'
 complete -F _gitbranches gfiles
+
+# Displays particular file contents at particular revision
+gshFileAtRevision() {
+  local FILE="$1"
+  local REVISION="$2"
+  git show "${REVISION}":"${FILE}"
+}
 
 # ======================================================
 # status
@@ -90,6 +100,9 @@ alias glog='git log -10'
 alias glog1="git log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative"
 alias glog2="git log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(bold white)- %an%C(reset)' --abbrev-commit"
 alias glog3="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
+
+# List all file extensions that can be found in a git repo
+alias gextensions="git ls-tree -r HEAD --name-only | sed -rn 's|.*/[^/]+.([^/.]+)$|\1|p' | sort | uniq"
 
 # ======================================================
 # branches - displaying
@@ -310,6 +323,9 @@ gri(){ # e.g "gri 4"
 # continue rebase
 alias grc='git rebase --continue'
 
+# abort rebase
+alias grabort='git rebase --abort'
+
 # Rebase on top of master
 alias gremaster='git rebase master'
 
@@ -376,3 +392,10 @@ gofwd() {
   git checkout `git rev-list --topo-order HEAD.."$*" | tail -1`
 }
 complete -F _gitbranches gofwd
+
+# ======================================================
+# repo cleanup and other stuff
+# ======================================================
+
+# For fixing CRLF issues after adding .gitattributes file
+gfixCRLF="git rm --cached -r . && git reset --hard && git commit -a -m 'Normalize CRLF' -n"

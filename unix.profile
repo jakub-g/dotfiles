@@ -40,5 +40,8 @@ alias serve3='python -m http.server 88'
 # list all files from dir and subdirs, sort by filesize
 alias filesBySize='find . -type f -exec ls -s {} \; | sort -n -r'
 
+# display number of files in current directory, recursively
+alias countFiles='find . -type f -print | wc -l'
+
 # exit the console
 alias xx='exit'
