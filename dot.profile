@@ -2,8 +2,7 @@
 
 ############## README ##############
 #
-# 1. This file has to be renamed to '.profile'. I've renamed it to dot.profile
-#    so it's not hidden by 'ls' by default.
+# 1. This file has to be sourced in '.profile'.
 # 2. Perhaps you'll have to convert EOL to UNIX (\n), otherwise it may not work.
 #
 ####################################
@@ -20,6 +19,7 @@ source ~/github.profile
 source ~/ariatemplates.profile
 source ~/util.profile
 source ~/js.profile
+source ~/java.profile
 
 # pull dot profile files from ~ to cwd
 alias dotpull='cp ~/*.profile .'
