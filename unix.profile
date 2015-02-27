@@ -21,6 +21,9 @@ alias tac='perl -e "print reverse <>"'
 alias rev='tac'
 alias reverse='tac'
 
+# extended, case-insensitive grep
+alias iegrep='grep -iE'
+
 # up one directory
 alias up='cd ..'
 alias upp='cd ../..'

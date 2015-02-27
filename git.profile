@@ -398,4 +398,4 @@ complete -F _gitbranches gofwd
 # ======================================================
 
 # For fixing CRLF issues after adding .gitattributes file
-gfixCRLF="git rm --cached -r . && git reset --hard && git commit -a -m 'Normalize CRLF' -n"
+alias gfixCRLF="git rm --cached -r . && git reset --hard && git commit -a -m 'Normalize CRLF' -n"
