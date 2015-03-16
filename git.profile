@@ -329,6 +329,9 @@ alias grabort='git rebase --abort'
 # Rebase on top of master
 alias gremaster='git rebase master'
 
+# Fetch and rebase on top of the tracking branch
+alias gfgr='git fetch && git rebase'
+
 # ======================================================
 # pushing
 # ======================================================
