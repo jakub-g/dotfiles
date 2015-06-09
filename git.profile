@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Set git user config
+alias ginit="git config user.email 'jakub.g.opensource.gmail.com'; git config user.name 'jakub-g'"
+
 # ======================================================
 # autocompletion helpers
 # ======================================================
@@ -30,6 +33,9 @@ alias gdc='git diff --cached'
 # Display diff stats (one file per line)
 alias gds='git diff --stat --stat-width=140 --stat-name-width=120 --stat-graph-width=20'
 
+# Display diff, ignore whitespace
+alias gdw='git diff -w'
+
 # Display code diff of the tip in branch/tag/commit. Shows HEAD if parameterless.
 alias gsh='git show'
 complete -F _gitbranches gsh
@@ -52,10 +58,16 @@ alias gdmin='git diff --color-words'
 
 # Displays files changed in a particular commit.
 # Usage:
-#  gfiles <commit-id>
-#  gfiles HEAD
-alias gfiles='git diff-tree -r --name-only --no-commit-id'
-complete -F _gitbranches gfiles
+#  findFilesChangedInCommit <commit-id>
+#  findFilesChangedInCommit HEAD
+alias findFilesChangedInCommit='git diff-tree -r --name-only --no-commit-id'
+complete -F _gitbranches findFilesChangedInCommit
+
+# Displays ".orig" files in a current folder and subfolders
+alias findGitOrigFiles='find . -name "*.orig" -print'
+
+# Deletes ".orig" files in a current folder and subfolders
+alias findAndRemoveGitOrigFiles='find . -name "*.orig" -print | xargs -I % sh -c "echo %; rm %"'
 
 # Displays particular file contents at particular revision
 gshFileAtRevision() {
@@ -246,6 +258,9 @@ alias gcam='git commit -a -m'
 
 # Amend the last commit - e.g. fix the message.
 alias gamend='git commit --amend'
+
+# Quick amend, without changing commit message
+alias gamendq='git commit --amend --no-edit'
 
 # Amend the last commit, squashing all local changes into it.
 alias gamendall='gaaa && gamend'
