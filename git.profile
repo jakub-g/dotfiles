@@ -93,18 +93,19 @@ alias gss='git status -s'
 # Display flat log. h/his like history.
 # Usage: gh (use ghm for more items)
 alias ghis='ghm | cat' # it displays in less even if is short enough, thus cat
-alias gh='ghiss'
-
-# Like gh, if you want to display more items.
-# Usage:
-#  ghm -20
-alias ghm='git log --format="%C(cyan)%cd%Creset %C(yellow)%h%Creset %s %Cgreen%an%Creset %n%C(black bold)%b%Creset" --date=short -20'
-
 # Display flat short log.
 # Usage:
-#  ghiss
-#  ghiss -20
-alias ghiss='git log --oneline -20'
+#  gh
+#  ghm -50
+alias gh='ghm -20'
+alias ghm='git log --format="%C(yellow)%h%Creset %C(cyan)%cd%Creset %s %Cgreen%an%Creset" --date=short'
+
+# Like gh, if you want to display full commit message
+# Usage:
+#  ghx
+#  ghxm -50
+alias ghx='ghxm -20'
+alias ghxm='git log --format="%C(cyan)%cd%Creset %C(yellow)%h%Creset %s %Cgreen%an%Creset %n%C(black bold)%b%Creset" --date=short'
 
 # Various non-flat log versions
 alias gl='git log -5'
