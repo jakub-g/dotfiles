@@ -80,7 +80,7 @@ nextiss () {
 #  - python installed (to open default browser),
 #  - or chrome installed,
 #  - or firefox in the PATH / alias
-pullreq () {
+ghpullreq () {
     # read params passed to the function...
     local T_GHUSER=$1
     local T_GHREPO=$2
