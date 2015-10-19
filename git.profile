@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set git user config
-alias ginit="git config user.email 'jakub.g.opensource.gmail.com'; git config user.name 'jakub-g'"
+alias ginitconfig="git config user.email 'jakub.g.opensource@gmail.com'; git config user.name 'jakub-g'"
 
 # ======================================================
 # autocompletion helpers
