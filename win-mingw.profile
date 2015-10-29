@@ -29,7 +29,7 @@ test -f "/c/Program Files (x86)/Google/Chrome/Application/chrome.exe" && alias c
 
 # Open Chrome Canary from shell (Windows 7).
 _chrome_canary="$USERPROFILE\AppData\Local\Google\Chrome SxS\Application\chrome.exe"
-$ test -f "${_chrome_canary}" && alias chrome-canary='${_chrome_canary}'
+test -f "${_chrome_canary}" && alias chrome-canary='"${_chrome_canary}"'
 
 # Open IE from shell
 alias iexplore='/c/Program\ Files/Internet\ Explorer/iexplore.exe'
