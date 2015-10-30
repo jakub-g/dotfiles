@@ -11,8 +11,9 @@ export HISTSIZE=4000 HISTFILESIZE=4000
 export HISTCONTROL=ignoredups:erasedups
 export PROMPT_COMMAND='history -a'
 
-source ~/unix.profile
-source ~/unix-mingw.profile
+source ~/unix-portable.profile
+source ~/unix-only.profile
+source ~/unix-only-mingw.profile
 source ~/win-mingw.profile
 source ~/git.profile
 source ~/github.profile
