@@ -7,9 +7,12 @@
 	old = white red
 [color "status"]
 	changed = white red
+        untracked = white cyan
 [core]
 	whitespace = cr-at-eol
 	autocrlf = true
+	editor = vim
+	excludesfile = ~/gitignore_global.conf
 [merge]
 	conflictstyle = diff3
 [push]
