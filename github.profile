@@ -1,5 +1,7 @@
 #!/bin/bash
 
+alias npmgh='npm --userconfig=/d/gh.npmrc'
+
 # Print the number of the next issue of given repo.
 # Usage:
 #  nextiss [<username> [<reponame>]]
