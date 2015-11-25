@@ -30,6 +30,7 @@ alias upp='cd ../..'
 alias uppp='cd ../../..'
 alias upppp='cd ../../../..'
 
+alias cdup='cd ..'
 alias cd.='cd ..'
 alias cd..='cd ../..'
 alias cd...='cd ../../..'
