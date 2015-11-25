@@ -22,7 +22,7 @@ alias gogit='cd "./"$(git rev-parse --show-cdup)' # if already in git dir,empty 
 # diff
 # ======================================================
 
-alias gitk='gitk &'
+alias gitkk='gitk &'
 
 # Display diff code
 alias gd='git diff'
@@ -245,6 +245,9 @@ alias gdiscard='git reset --hard HEAD'
 # ======================================================
 # committing
 # ======================================================
+
+# "Work in progress" commit: add everything and commit with "WIP" commit message
+alias wip='gaaa; gcm WIP'
 
 alias gc='git commit'
 alias gca='git commit -a'
