@@ -260,17 +260,17 @@ alias gcm='git commit -m'           # Like above
 #  Usage like 'gcm'. Don't confuse with commit --amend
 alias gcam='git commit -a -m'
 
-# Amend the last commit - e.g. fix the message.
-alias gamend='git commit --amend'
-
 # Quick amend, without changing commit message
-alias gamendq='git commit --amend --no-edit'
+alias gamend='git commit --amend --no-edit'
 
 # Amend the last commit, squashing all local changes into it.
 alias gamendall='gaaa && gamend'
 
 # Amend the last commit: set date to current date
 alias gamenddate='git commit --amend --date="$(date -R)"'
+
+# Amend the last commit - e.g. fix the message.
+alias gamendmsg='git commit --amend'
 
 # Amend the last commit: set the author
 # Usage:
