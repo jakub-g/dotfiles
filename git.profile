@@ -115,8 +115,9 @@ alias glog2="git log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %
 alias glog3="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 
 # List all file extensions that can be found in a git repo
-#alias gextensions="git ls-tree -r HEAD --name-only | sed -rn 's|.*\.([^\.]+)$|\1|p' | sort | uniq"
-alias gextensions="git ls-tree -r HEAD --name-only | perl -ne 'print $1 if m/\.([^.\/]+)$/' | sort -u"
+# alias gextensions='git ls-tree -r HEAD --name-only | sed -rn "s|.*\.([^\.]+)$|\1|p" | sort | uniq'
+# note the escape before $1
+alias gextensions='git ls-tree -r HEAD --name-only | perl -ne "print \$1 if m/\.([^.\/]+)$/" | sort -u'
 
 # ======================================================
 # branches - displaying
