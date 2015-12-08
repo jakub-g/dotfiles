@@ -64,10 +64,10 @@ alias findFilesChangedInCommit='git diff-tree -r --name-only --no-commit-id'
 complete -F _gitbranches findFilesChangedInCommit
 
 # Displays ".orig" files in a current folder and subfolders
-alias findGitOrigFiles='find . -name "*.orig" -print'
+alias find-orig-files='findmine | grep -iE .orig$'
 
 # Deletes ".orig" files in a current folder and subfolders
-alias findAndRemoveGitOrigFiles='find . -name "*.orig" -print | xargs -I % sh -c "echo %; rm %"'
+alias find-orig-files-and-remove='findOrigFiles | xargs -I % sh -c "echo %; rm %"'
 
 # Displays particular file contents at particular revision
 gshFileAtRevision() {
