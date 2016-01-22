@@ -224,6 +224,19 @@ alias gsyncc='git fetch origin && git rebase origin/$(gcurrbranch) $(gcurrbranch
 alias gsyncf='git stash && gsync && git stash pop'
 alias gsynctag='git fetch --tags origin'
 
+# Usage:
+#  git-sync-remote <remote-name>
+# Example:
+#  git-sync-remote alice
+git-sync-remote(){
+  REMOTE_NAME="$1"
+  if [ -z "${REMOTE_NAME}" ] ; then
+    echo 'You need to provide remote name'
+    return
+  fi
+  git branch -ar | sed 's|^[ \t]*||' | grep -e "^${REMOTE_NAME}/" | sed "s|${REMOTE_NAME}/||" | xargs git fetch "${REMOTE_NAME}"
+}
+
 # ======================================================
 # staging / unstaging
 # ======================================================
