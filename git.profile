@@ -237,6 +237,14 @@ git-sync-remote(){
   git branch -ar | sed 's|^[ \t]*||' | grep -e "^${REMOTE_NAME}/" | sed "s|${REMOTE_NAME}/||" | xargs git fetch "${REMOTE_NAME}"
 }
 
+git-delete-merged-branches-local(){
+  git branch --merged | grep -v "\*" | grep -v master | xargs -n 1 git branch -d
+}
+
+git-delete-merged-branches-remote(){
+  git branch -r --merged | grep -v master | grep origin | sed 's/origin\///' | xargs -n 1 git push --delete origin --no-verify
+}
+
 # ======================================================
 # staging / unstaging
 # ======================================================
