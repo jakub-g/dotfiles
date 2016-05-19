@@ -206,18 +206,23 @@ alias guptag='git fetch --tags upstream'       # tags are not downloaded by defa
 
 alias gf='git fetch'
 gsync() {
-	local CURR_BRANCH=$(gcurrbranch)
-	git fetch origin
+  local CURR_BRANCH=$(gcurrbranch)
+  git fetch origin
 
-	# rebase current local branch on top of origin tracking branch
-	if (gbrexistsRemote "origin/${CURR_BRANCH}") ; then
-	  git rebase origin/${CURR_BRANCH} ${CURR_BRANCH}
+  # rebase current local branch on top of origin tracking branch
+  if (gbrexistsRemote "origin/${CURR_BRANCH}") ; then
+    git rebase origin/${CURR_BRANCH} ${CURR_BRANCH}
     fi
 
-	# additionally, rebase local master on top of origin master, if applicable
-	if (gbrexistsRemote "origin/master" && gbrexists "master") ; then
-	  git rebase origin/master master
-    fi
+  # additionally, rebase local master on top of origin master, if applicable
+  if (gbrexistsRemote "origin/master" && gbrexists "master") ; then
+    git rebase origin/master master
+  fi
+
+  # additionally, rebase local develop on top of origin develop, if applicable
+  if (gbrexistsRemote "origin/develop" && gbrexists "develop") ; then
+    git rebase origin/develop develop
+  fi
 }
 # Use gsyncc in favor of gsync when you're in gh-pages etc.
 alias gsyncc='git fetch origin && git rebase origin/$(gcurrbranch) $(gcurrbranch)'
