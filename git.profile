@@ -212,15 +212,19 @@ gsync() {
   # rebase current local branch on top of origin tracking branch
   if (gbrexistsRemote "origin/${CURR_BRANCH}") ; then
     git rebase origin/${CURR_BRANCH} ${CURR_BRANCH}
-    fi
+  fi
 
   # additionally, rebase local master on top of origin master, if applicable
-  if (gbrexistsRemote "origin/master" && gbrexists "master") ; then
+  if (gbrexistsRemote "origin/releases/master" && gbrexists "master") ; then
+    git rebase origin/releases/master master
+  elif (gbrexistsRemote "origin/master" && gbrexists "master") ; then
     git rebase origin/master master
   fi
 
   # additionally, rebase local develop on top of origin develop, if applicable
-  if (gbrexistsRemote "origin/develop" && gbrexists "develop") ; then
+  if (gbrexistsRemote "origin/releases/develop" && gbrexists "develop") ; then
+    git rebase origin/releases/develop develop
+  elif (gbrexistsRemote "origin/develop" && gbrexists "develop") ; then
     git rebase origin/develop develop
   fi
 }
