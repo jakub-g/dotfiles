@@ -185,7 +185,9 @@ alias forkto='git checkout -b'
 alias moveto='git branch -m'
 
 # Master is checked out so frequently it deserves its own command.
-alias gmaster='git checkout master'
+alias master='git checkout master'
+alias develop='git checkout develop'
+alias dev='git checkout develop'
 
 complete -F _gitbranches goto
 complete -F _gitbranches gck
@@ -205,16 +207,20 @@ alias guptag='git fetch --tags upstream'       # tags are not downloaded by defa
 # ======================================================
 
 alias gf='git fetch'
+
+# Sync current branch, `master` and `develop` with origin
 gsync() {
   local CURR_BRANCH=$(gcurrbranch)
   git fetch origin
 
   # rebase current local branch on top of origin tracking branch
   if (gbrexistsRemote "origin/${CURR_BRANCH}") ; then
+    echo -e '\nSyncing current branch with origin...'
     git rebase origin/${CURR_BRANCH} ${CURR_BRANCH}
   fi
 
   # additionally, rebase local master on top of origin master, if applicable
+  echo -e '\nSyncing master...'
   if (gbrexistsRemote "origin/releases/master" && gbrexists "master") ; then
     git rebase origin/releases/master master
   elif (gbrexistsRemote "origin/master" && gbrexists "master") ; then
@@ -222,12 +228,26 @@ gsync() {
   fi
 
   # additionally, rebase local develop on top of origin develop, if applicable
+  echo -e '\nSyncing develop...'
   if (gbrexistsRemote "origin/releases/develop" && gbrexists "develop") ; then
     git rebase origin/releases/develop develop
   elif (gbrexistsRemote "origin/develop" && gbrexists "develop") ; then
     git rebase origin/develop develop
   fi
+
+  echo -e '\nComing back to original branch...'
+  git checkout ${CURR_BRANCH}
 }
+
+# Rebase on top of master, develop
+alias gremaster='git rebase master'
+
+alias remaster='git rebase origin/releases/master'
+alias redev='git rebase origin/releases/develop'
+
+alias gsync-master='gsync && echo -e "\nRebasing on top of " && remaster'
+alias gsync-develop='gsync && echo -e "\nRebasing on top of develop" &&  redev'
+
 # Use gsyncc in favor of gsync when you're in gh-pages etc.
 alias gsyncc='git fetch origin && git rebase origin/$(gcurrbranch) $(gcurrbranch)'
 alias gsyncf='git stash && gsync && git stash pop'
@@ -376,9 +396,6 @@ alias grc='git rebase --continue'
 
 # abort rebase
 alias grabort='git rebase --abort'
-
-# Rebase on top of master
-alias gremaster='git rebase master'
 
 # Fetch and rebase on top of the tracking branch
 alias gfgr='git fetch && git rebase'
