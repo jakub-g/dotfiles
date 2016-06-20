@@ -214,10 +214,11 @@ gsync() {
   git fetch origin
 
   # rebase current local branch on top of origin tracking branch
-  if (gbrexistsRemote "origin/${CURR_BRANCH}") ; then
-    echo -e '\nSyncing current branch with origin...'
-    git rebase origin/${CURR_BRANCH} ${CURR_BRANCH}
-  fi
+  # edit: this does not make sense, if we are on feature branch and want to push --force!
+  #if (gbrexistsRemote "origin/${CURR_BRANCH}") ; then
+  #  echo -e '\nSyncing current branch with origin...'
+  #  git rebase origin/${CURR_BRANCH} ${CURR_BRANCH}
+  #fi
 
   # additionally, rebase local master on top of origin master, if applicable
   echo -e '\nSyncing master...'
