@@ -46,6 +46,7 @@ complete -F _gitbranches gshs
 
 # Same as gshs, but also shows committer (not only author)
 alias gshmeta='git show --stat --stat-width=140 --stat-name-width=120 --stat-graph-width=20 --pretty=full'
+alias gshm='gshmeta'
 
 # Same as gshmeta but ignores EOL changes
 alias gshmetamin='gshmeta --ignore-space-at-eol'
@@ -248,6 +249,7 @@ alias redev='git rebase origin/releases/develop'
 
 alias gsync-master='gsync && echo -e "\nRebasing on top of " && remaster'
 alias gsync-develop='gsync && echo -e "\nRebasing on top of develop" &&  redev'
+alias gsync-dev='gsync-develop'
 
 # Use gsyncc in favor of gsync when you're in gh-pages etc.
 alias gsyncc='git fetch origin && git rebase origin/$(gcurrbranch) $(gcurrbranch)'
