@@ -416,6 +416,9 @@ alias gpo='git push origin'
 # Push --force (to a tracking branch).
 alias gpf='git push -f'
 
+# Push --force (to a tracking branch) and skip hooks.
+alias gpfnv='git push -f --no-verify'
+
 # Push to origin -- special command to avoid pushing to upstream by confusing upstream and origin accidentally.
 alias gpushfork='gpo'
 
