@@ -45,7 +45,7 @@ alias gshs='git show --stat --stat-width=140 --stat-name-width=120 --stat-graph-
 complete -F _gitbranches gshs
 
 # Same as gshs, but also shows committer (not only author)
-alias gshmeta='git show --stat --stat-width=140 --stat-name-width=120 --stat-graph-width=20 --pretty=full'
+alias gshmeta='git show --stat --stat-width=140 --stat-name-width=120 --stat-graph-width=20 --pretty=fuller'
 alias gshm='gshmeta'
 
 # Same as gshmeta but ignores EOL changes
