@@ -303,6 +303,7 @@ alias gdiscard='git reset --hard HEAD'
 
 # "Work in progress" commit: add everything and commit with "WIP" commit message
 alias wip='gaaa; gcm WIP'
+alias wipnv='wip --no-verify'
 
 alias gc='git commit'
 alias gca='git commit -a'
