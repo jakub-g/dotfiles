@@ -10,6 +10,17 @@
 export HISTSIZE=4000 HISTFILESIZE=4000
 export HISTCONTROL=ignoredups:erasedups
 export PROMPT_COMMAND='history -a'
+export MAVEN_OPTS=-Xmx1024m
+
+export GIT_PS1_SHOWDIRTYSTATE=true # unstaged (*) - staged (+)
+export GIT_PS1_SHOWSTASHSTATE=true # stashed ($)
+export GIT_PS1_SHOWUNTRACKEDFILES=true # untracked (%)
+# - auto: Show Ahead (<), Behind (>), Diverged (<>), No Difference (=)
+# - verbose: Show number of commits ahead/behind (+/-) upstream (i.e. u+1, u-1, u=)
+# - name if verbose, then also show the upstream abbrev name
+export GIT_PS1_SHOWUPSTREAM="verbose"
+export GIT_PS1_DESCRIBE_STYLE="default"
+export GIT_PS1_SHOWCOLORHINTS="true"
 
 source ~/unix-portable.profile
 source ~/unix-only.profile
