@@ -28,6 +28,8 @@ source ~/unix-only-mingw.profile
 source ~/win-mingw.profile
 source ~/git.profile
 source ~/github.profile
+source ~/bitbucket_fetchpr.profile
+source ~/bitbucket_pullrequest.profile
 source ~/ariatemplates.profile
 source ~/util.profile
 source ~/js.profile
