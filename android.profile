@@ -12,3 +12,4 @@ deploy-apk() {
 }
 
 alias uninstall-apk="adb shell pm uninstall -k $ANDROID_PACKAGE_ID"
+alias aks='adb kill-server; adb devices'
