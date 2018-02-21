@@ -8,7 +8,7 @@ deploy-apk() {
     return
   fi
   adb shell pm uninstall -k $ANDROID_PACKAGE_ID
-  adb install -r -d $1
+  adb install -r -d -t $1
 }
 
 alias uninstall-apk="adb shell pm uninstall -k $ANDROID_PACKAGE_ID"
