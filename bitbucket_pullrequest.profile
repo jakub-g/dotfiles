@@ -132,8 +132,8 @@ pullrequest-bb() {
   # some authentication which does a redirection at the end, which loses the query string...
 
   # open the pending pull requests list for the given repo
-  explorer "$URL_VIEW_PENDING_PRS"
+  start "$URL_VIEW_PENDING_PRS"
   sleep 1
   # open a page when you create a new pull request
-  explorer "$URL_OPEN_NEW_PR"
+  start "$URL_OPEN_NEW_PR"
 }
