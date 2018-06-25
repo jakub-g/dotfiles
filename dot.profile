@@ -34,8 +34,30 @@ PS1="$PS1"'\w'                 # current working directory
   PS1="$PS1"'\[\033[36m\]'  # change color to cyan
   #PS1="$PS1"'`__git_ps1`'   # bash function
   # __git_ps1 is horribly slow, let's just display branch name without status
-  PS1="$PS1"'`if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then echo " ($(git rev-parse --abbrev-ref HEAD))"; fi`'
-  #'IFS="\t" read -r -a array <<< $(git-diff-to-tracking-branch); echo ${array[0]}; echo ${array[1]}
+  BASIC_PS1='`            if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then'
+  BASIC_PS1="$BASIC_PS1"'   printf " (";'
+  BASIC_PS1="$BASIC_PS1"'   printf $(git rev-parse --abbrev-ref HEAD);'
+  #slow as well...
+  if false; then
+      :
+      #BASIC_PS1="$BASIC_PS1"'   date +%s;'
+      BASIC_PS1="$BASIC_PS1"'   IFS="\t " read -r -a SPLIT_INPUT <<< $(git rev-list --left-right --count HEAD...$(git rev-parse --abbrev-ref --symbolic-full-name @{u}));'
+      BASIC_PS1="$BASIC_PS1"'   echo "xx ${SPLIT_INPUT[0]} zz ${SPLIT_INPUT[1]} qq ${SPLIT_INPUT[2]} yy";'
+      BASIC_PS1="$BASIC_PS1"'   if [ "${SPLIT_INPUT[0]}" == "0" ] && [ "${SPLIT_INPUT[1]}" == "0" ] ; then'
+      BASIC_PS1="$BASIC_PS1"'     printf "=";'
+      BASIC_PS1="$BASIC_PS1"'   elif [ "${SPLIT_INPUT[1]}" == "0" ]; then'
+      BASIC_PS1="$BASIC_PS1"'     printf "+${SPLIT_INPUT[0]}";'
+      BASIC_PS1="$BASIC_PS1"'   elif [ "${SPLIT_INPUT[0]}" == "0" ]; then'
+      BASIC_PS1="$BASIC_PS1"'     printf "-${SPLIT_INPUT[1]}";'
+      BASIC_PS1="$BASIC_PS1"'   else'
+      BASIC_PS1="$BASIC_PS1"'     printf "+${SPLIT_INPUT[0]}-${SPLIT_INPUT[1]}";'
+      BASIC_PS1="$BASIC_PS1"'   fi;'
+      #BASIC_PS1="$BASIC_PS1"'   date +%s;'
+  fi
+  BASIC_PS1="$BASIC_PS1"'   printf ")";'
+  BASIC_PS1="$BASIC_PS1"' fi`'
+  PS1="$PS1""$BASIC_PS1"
+  #; echo ${SPLIT_INPUT[0]}; echo ${SPLIT_INPUT[1]}
 PS1="$PS1"'\[\033[0m\]'        # change color
 PS1="$PS1"'\n'                 # new line
 PS1="$PS1"'$ '                 # prompt: always $
