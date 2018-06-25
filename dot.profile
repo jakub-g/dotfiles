@@ -12,9 +12,9 @@ export HISTCONTROL=ignoredups:erasedups
 export PROMPT_COMMAND='history -a'
 export MAVEN_OPTS=-Xmx1024m
 
-export GIT_PS1_SHOWDIRTYSTATE=true # unstaged (*) - staged (+)
-export GIT_PS1_SHOWSTASHSTATE=true # stashed ($)
-export GIT_PS1_SHOWUNTRACKEDFILES=true # untracked (%)
+export GIT_PS1_SHOWDIRTYSTATE=false # unstaged (*) - staged (+)
+export GIT_PS1_SHOWSTASHSTATE=false # stashed ($)
+export GIT_PS1_SHOWUNTRACKEDFILES=false # untracked (%)
 # - auto: Show Ahead (<), Behind (>), Diverged (<>), No Difference (=)
 # - verbose: Show number of commits ahead/behind (+/-) upstream (i.e. u+1, u-1, u=)
 # - name if verbose, then also show the upstream abbrev name
@@ -32,7 +32,9 @@ PS1="$PS1"'\[\033[35m\]'       # change to purple
 PS1="$PS1"'\[\033[33m\]'       # change to brownish yellow
 PS1="$PS1"'\w'                 # current working directory
   PS1="$PS1"'\[\033[36m\]'  # change color to cyan
-  PS1="$PS1"'`__git_ps1`'   # bash function
+#  PS1="$PS1"'`__git_ps1`'   # bash function
+# __git_ps1 is horribly slow, let's just display branch name without status
+PS1="$PS1"'`if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then echo " ($(git rev-parse --abbrev-ref HEAD))"; fi`'
 PS1="$PS1"'\[\033[0m\]'        # change color
 PS1="$PS1"'\n'                 # new line
 PS1="$PS1"'$ '                 # prompt: always $
