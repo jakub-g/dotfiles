@@ -32,9 +32,10 @@ PS1="$PS1"'\[\033[35m\]'       # change to purple
 PS1="$PS1"'\[\033[33m\]'       # change to brownish yellow
 PS1="$PS1"'\w'                 # current working directory
   PS1="$PS1"'\[\033[36m\]'  # change color to cyan
-#  PS1="$PS1"'`__git_ps1`'   # bash function
-# __git_ps1 is horribly slow, let's just display branch name without status
-PS1="$PS1"'`if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then echo " ($(git rev-parse --abbrev-ref HEAD))"; fi`'
+  #PS1="$PS1"'`__git_ps1`'   # bash function
+  # __git_ps1 is horribly slow, let's just display branch name without status
+  PS1="$PS1"'`if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then echo " ($(git rev-parse --abbrev-ref HEAD))"; fi`'
+  #'IFS="\t" read -r -a array <<< $(git-diff-to-tracking-branch); echo ${array[0]}; echo ${array[1]}
 PS1="$PS1"'\[\033[0m\]'        # change color
 PS1="$PS1"'\n'                 # new line
 PS1="$PS1"'$ '                 # prompt: always $

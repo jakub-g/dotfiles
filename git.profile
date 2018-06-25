@@ -136,6 +136,11 @@ alias gbs='git for-each-ref --sort=-committerdate --format="%(refname:short)" re
 # Display just the name of the current branch
 alias gcurrbranch='git rev-parse --abbrev-ref HEAD'
 
+# Display just the name of the branch that the current branch is tracking
+alias gcurrbranch-trackingbranch='git rev-parse --abbrev-ref --symbolic-full-name @{u}'
+
+alias git-diff-to-tracking-branch='git rev-list --left-right --count $(gcurrbranch)...$(gcurrbranch-trackingbranch)'
+
 # Display just the name of the last branch committed to
 alias gblast='git for-each-ref --sort=-committerdate --format="%(refname:short)" refs/heads/ | head -1'
 
