@@ -418,6 +418,9 @@ alias gpo='git push origin'
 # Push --force (to a tracking branch).
 alias gpf='git push -f'
 
+# Push to origin to a matching branch, and track
+alias gpu='git push -u origin $(gcurrbranch)'
+
 # Push --force (to a tracking branch) and skip hooks.
 alias gpfnv='git push -f --no-verify'
 
