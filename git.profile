@@ -195,8 +195,8 @@ alias moveto='git branch -m'
 
 # Master is checked out so frequently it deserves its own command.
 alias master='git checkout master'
-alias develop='git checkout develop'
-alias dev='git checkout develop'
+alias develop='git checkout dev'
+alias dev='git checkout dev'
 
 complete -F _gitbranches goto
 complete -F _gitbranches gck
@@ -253,8 +253,8 @@ gsync() {
 # Rebase on top of master, develop
 alias gremaster='git rebase master'
 
-alias remaster='git rebase origin/releases/master'
-alias redev='git rebase origin/releases/develop'
+alias remaster='git rebase origin/master'
+alias redev='git rebase origin/develop'
 
 alias gsync-master='gsync && echo -e "\nRebasing on top of " && remaster'
 alias gsync-develop='gsync && echo -e "\nRebasing on top of develop" &&  redev'
