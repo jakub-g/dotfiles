@@ -9,6 +9,9 @@
 
 export HISTSIZE=4000 HISTFILESIZE=4000
 export HISTCONTROL=ignoredups:erasedups
+#if [[ -n "${ConEmuPID}" ]]; then
+  #PROMPT_COMMAND='ConEmuC -StoreCWD; history -a'
+#fi
 export PROMPT_COMMAND='history -a'
 export MAVEN_OPTS=-Xmx1024m
 

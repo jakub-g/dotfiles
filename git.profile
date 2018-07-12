@@ -279,7 +279,7 @@ git-sync-remote(){
 }
 
 git-delete-merged-branches-local(){
-  git branch --merged | grep -v "\*" | grep -v master | xargs -n 1 git branch -d
+  git branch --merged | grep -v "\*" | grep -v master | grep -v develop | grep -v dev | xargs -n 1 git branch -d
 }
 
 git-delete-merged-branches-remote(){
