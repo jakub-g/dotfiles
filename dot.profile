@@ -69,6 +69,7 @@ source ~/unix-portable.profile
 source ~/unix-only.profile
 source ~/unix-only-mingw.profile
 source ~/win-mingw.profile
+source ~/ssh-agent.profile
 source ~/git.profile
 source ~/github.profile
 source ~/bitbucket_fetchpr.profile
