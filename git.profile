@@ -195,7 +195,6 @@ alias moveto='git branch -m'
 
 # Master is checked out so frequently it deserves its own command.
 alias master='git checkout master'
-alias develop='git checkout dev'
 alias dev='git checkout dev'
 
 complete -F _gitbranches goto
@@ -218,7 +217,7 @@ alias guptag='git fetch --tags upstream'       # tags are not downloaded by defa
 alias gf='git fetch'
 alias gfu='git fetch upstream'
 
-# Sync current branch, `master` and `develop` with origin
+# Sync current branch, `master` and `dev` with origin
 gsync() {
   local CURR_BRANCH=$(gcurrbranch)
   git fetch origin
@@ -238,27 +237,26 @@ gsync() {
     git rebase origin/master master
   fi
 
-  # additionally, rebase local develop on top of origin develop, if applicable
-  echo -e '\nSyncing develop...'
-  if (gbrexistsRemote "origin/releases/develop" && gbrexists "develop") ; then
-    git rebase origin/releases/develop develop
-  elif (gbrexistsRemote "origin/develop" && gbrexists "develop") ; then
-    git rebase origin/develop develop
+  # additionally, rebase local dev on top of origin dev, if applicable
+  echo -e '\nSyncing dev...'
+  if (gbrexistsRemote "origin/releases/dev" && gbrexists "dev") ; then
+    git rebase origin/releases/dev dev
+  elif (gbrexistsRemote "origin/dev" && gbrexists "dev") ; then
+    git rebase origin/dev dev
   fi
 
   echo -e '\nComing back to original branch...'
   git checkout ${CURR_BRANCH}
 }
 
-# Rebase on top of master, develop
+# Rebase on top of master, dev
 alias gremaster='git rebase master'
 
 alias remaster='git rebase origin/master'
-alias redev='git rebase origin/develop'
+alias redev='git rebase origin/dev'
 
 alias gsync-master='gsync && echo -e "\nRebasing on top of " && remaster'
-alias gsync-develop='gsync && echo -e "\nRebasing on top of develop" &&  redev'
-alias gsync-dev='gsync-develop'
+alias gsync-dev='gsync && echo -e "\nRebasing on top of dev" &&  redev'
 
 # Use gsyncc in favor of gsync when you're in gh-pages etc.
 alias gsyncc='git fetch origin && git rebase origin/$(gcurrbranch) $(gcurrbranch)'
@@ -279,7 +277,7 @@ git-sync-remote(){
 }
 
 git-delete-merged-branches-local(){
-  git branch --merged | grep -v "\*" | grep -v master | grep -v develop | grep -v dev | xargs -n 1 git branch -d
+  git branch --merged | grep -v "\*" | grep -v master | grep -v dev | xargs -n 1 git branch -d
 }
 
 git-delete-merged-branches-remote(){
@@ -429,11 +427,11 @@ alias gpf='git push -f'
 # Push to origin to a matching branch, and track
 alias gpu='git push -u origin $(gcurrbranch)'
 
+# Push to fork to a matching branch, and track
+alias gpfork='git push -u fork $(gcurrbranch)'
+
 # Push --force (to a tracking branch) and skip hooks.
 alias gpfnv='git push -f --no-verify'
-
-# Push to origin -- special command to avoid pushing to upstream by confusing upstream and origin accidentally.
-alias gpushfork='gpo'
 
 # Push to origin, to master branch
 alias gpom='git push origin master'
