@@ -1,3 +1,9 @@
+#!/bin/bash
+
+if [ ! -d '~/.ssh' ]; then
+    return
+fi
+
 env=~/.ssh/agent.env
 
 agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
