@@ -215,6 +215,7 @@ alias guptag='git fetch --tags upstream'       # tags are not downloaded by defa
 # ======================================================
 
 alias gf='git fetch'
+alias gfd='git fetch origin dev'
 alias gfu='git fetch upstream'
 
 # Sync current branch, `master` and `dev` with origin
