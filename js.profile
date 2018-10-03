@@ -1,5 +1,7 @@
 #!/bin/bash
 
+alias nnode='winpty -Xallow-non-tty node'
+
 alias ni='npm install'
 alias nt='npm test'
 
