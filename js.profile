@@ -7,6 +7,7 @@ alias nt='npm test'
 
 alias grunt-debug='node --debug-brk /d/bin/nodist/bin/node_modules/grunt-cli/bin/grunt'
 alias mocha-debug='node --debug-brk /d/bin/nodist/bin/node_modules/mocha/bin/mocha'
+alias grunt-inspect='node --inspect --inspect-brk ./node_modules/grunt-cli/bin/grunt'
 
 alias npmrun='npm run'
 alias _npmscripts_print="node -e \"console.log(Object.keys(require('./package.json').scripts, null, '  ').join(' '))\""
