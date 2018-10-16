@@ -1,5 +1,6 @@
 #!/bin/bash
 
+alias timer='node -e "i=0;setInterval(()=>console.log(++i),1e3)"'
 todo() {
     echo "- [$(date '+%a %d.%m %Hh%M')] $*" >> ~/todo.txt
 }
