@@ -17,3 +17,17 @@ alias doing='doin'
 alias doins='cat ~/doin.txt'
 alias doinls='doins'
 alias doin-clean='echo "" > ~/doin.txt'
+
+# Usage: gzlen file.html
+gzlen() {
+    gzip -kc7 "$1" | wc -c
+}
+
+# Usage: brlen9 file.html
+brlen9() {
+    brotli --in "$1" --out temp.br --force --quality 9 && wc -c temp.br
+}
+# Usage: brlen11 file.html
+brlen11() {
+    brotli --in "$1" --out temp.br --force --quality 11 && wc -c temp.br
+}

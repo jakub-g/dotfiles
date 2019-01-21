@@ -2,7 +2,7 @@
 
 alias nnode='winpty -Xallow-non-tty node'
 
-alias ni='npm install'
+alias ni='npm install --ignore-scripts'
 alias nt='npm test'
 
 alias grunt-debug='node --debug-brk /d/bin/nodist/bin/node_modules/grunt-cli/bin/grunt'
