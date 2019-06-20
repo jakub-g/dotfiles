@@ -1,6 +1,10 @@
 #!/bin/bash
 
+# open explorer
 alias o='start .'
+
+# list user-specific env variables
+alias envuser='reg query "HKCU\Environment"'
 
 # Print clipboard contents
 alias showclip='cat /dev/clipboard'
