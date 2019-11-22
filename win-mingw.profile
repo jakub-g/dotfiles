@@ -20,6 +20,7 @@ alias n++='np'
 
 # Open Sublime3
 alias subl3='/c/Program\ Files/Sublime\ Text\ 3/sublime_text.exe'
+alias sub='subl3'
 
 # Open Firefox from shell.
 test -f "/c/Program Files (x86)/Mozilla Firefox/firefox.exe" && alias firefox='/c/Program\ Files\ \(x86\)/Mozilla\ Firefox/firefox.exe'

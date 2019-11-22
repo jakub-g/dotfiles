@@ -4,12 +4,14 @@ alias nnode='winpty -Xallow-non-tty node'
 
 alias ni='npm install --ignore-scripts'
 alias nt='npm test'
+alias ns='npm start'
+alias nr='npm run'
+alias npmrun='npm run'
 
 alias grunt-debug='node --debug-brk /d/bin/nodist/bin/node_modules/grunt-cli/bin/grunt'
 alias mocha-debug='node --debug-brk /d/bin/nodist/bin/node_modules/mocha/bin/mocha'
 alias grunt-inspect='node --inspect --inspect-brk ./node_modules/grunt-cli/bin/grunt'
 
-alias npmrun='npm run'
 alias _npmscripts_print="node -e \"console.log(Object.keys(require('./package.json').scripts, null, '  ').join(' '))\""
 _npmscripts_completion()
 {
@@ -18,3 +20,4 @@ _npmscripts_completion()
     COMPREPLY=( $(compgen -W "${opts}" -- $cur) )
 }
 complete -F _npmscripts_completion npmrun
+complete -F _npmscripts_completion nr
