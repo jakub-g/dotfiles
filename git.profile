@@ -109,7 +109,12 @@ alias ghx='ghxm -20'
 alias ghxm='git --no-pager log --format="%C(cyan)%cd%Creset %C(yellow)%h%Creset %s %Cgreen%an%Creset %n%C(black bold)%b%Creset" --date=short'
 
 # Various non-flat log versions
-alias gl='git log -5'
+alias gl='ghm -10'
+alias gl2='ghm -20'
+alias gl3='ghm -30'
+alias gl4='ghm -40'
+alias gl5='ghm -50'
+
 alias glog='git log -10'
 alias glog1="git log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative"
 alias glog2="git log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(bold white)- %an%C(reset)' --abbrev-commit"
