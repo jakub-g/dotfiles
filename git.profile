@@ -27,6 +27,9 @@ alias gitkk='gitk &'
 # Display diff code
 alias gd='git diff'
 
+# Display diff stats
+alias gdmeta='git diff --stat --stat-width=140 --stat-name-width=120 --stat-graph-width=20 --pretty=fuller'
+
 # Display staged diff code
 alias gdc='git diff --cached'
 

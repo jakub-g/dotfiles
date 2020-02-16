@@ -7,6 +7,7 @@ alias nt='npm test'
 alias ns='npm start'
 alias nr='npm run'
 alias npmrun='npm run'
+alias npmpublic='npm --userconfig /c/git/public.npmrc'
 
 alias grunt-debug='node --debug-brk /d/bin/nodist/bin/node_modules/grunt-cli/bin/grunt'
 alias mocha-debug='node --debug-brk /d/bin/nodist/bin/node_modules/mocha/bin/mocha'
