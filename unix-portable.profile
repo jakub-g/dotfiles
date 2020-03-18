@@ -41,9 +41,9 @@ alias serve='python -m SimpleHTTPServer 88'
 alias serve2='python -m SimpleHTTPServer 88'
 alias serve3='python -m http.server 88'
 
-# find files, excluding .git, node_modules etc
+# find files, excluding all dot-folders, .git, node_modules, dist, lib folders
 findmine() {
-  find . -not \( -path './.git' -prune \) -not \( -path './node_modules' -prune \) -not \( -path './*/node_modules' -prune \) -not \( -path './*/dist' -prune \)  -not \( -path './*/lib' -prune \) -type f "$@"
+  find . -not \( -path '*/\.*' -prune \) -not \( -path './.git' -prune \) -not \( -path './node_modules' -prune \) -not \( -path './*/node_modules' -prune \) -not \( -path './*/dist' -prune \)  -not \( -path './*/lib' -prune \) -type f "$@"
 }
 
 # list all files from dir and subdirs, sort by filesize
