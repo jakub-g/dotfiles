@@ -69,9 +69,13 @@ complete -F _gitbranches findFilesChangedInCommit
 
 # Displays ".orig" files in a current folder and subfolders
 alias find-orig-files='findmine | grep -iE .orig$'
+alias findorig='find-orig-files'
+alias origfind='find-orig-files'
 
 # Deletes ".orig" files in a current folder and subfolders
 alias find-orig-files-and-remove='find-orig-files | xargs -I % sh -c "echo %; rm %"'
+alias rmorig='find-orig-files-and-remove'
+alias origrm='find-orig-files-and-remove'
 
 # Displays particular file contents at particular revision
 gshFileAtRevision() {
