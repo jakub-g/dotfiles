@@ -307,6 +307,7 @@ alias ga='git add -u .'
 
 # 'git add absolutely all', even untracked and deleted
 alias gaaa='git add -A .'
+alias gaa='gaaa'
 
 # Unstage the file added to index.
 #  Usage: gunstage foo.txt
@@ -323,8 +324,11 @@ alias gdiscard='git reset --hard HEAD'
 # ======================================================
 
 # "Work in progress" commit: add everything and commit with "WIP" commit message
-alias wip='gaaa; gcm WIP'
+alias wip='gcm WIP'
 alias wipnv='wip --no-verify'
+
+alias wipaa='gaaa; wip'
+alias wipaanv='gaaa; wipnv'
 
 alias gc='git commit'
 alias gca='git commit -a'
@@ -420,7 +424,7 @@ gri(){ # e.g "gri 4"
 alias grc='git rebase --continue'
 
 # abort rebase
-alias grabort='git rebase --abort'
+alias gra='git rebase --abort'
 
 # Fetch and rebase on top of the tracking branch
 alias gfgr='git fetch && git rebase'
