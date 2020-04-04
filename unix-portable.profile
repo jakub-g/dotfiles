@@ -13,6 +13,9 @@ alias ll='ls -l --color'
 # list all files in current dir, one file per line, long output
 alias lla='ls -la --color'
 
+# count numbers of lines in a file
+alias wcl='wc -l'
+
 # clear screen
 alias cls='clear'
 
@@ -54,3 +57,19 @@ alias countFiles='find . -type f -print | wc -l'
 
 # exit the console
 alias xx='exit'
+
+# Simple pagination of long output
+# Usage:
+#  something | p 1    // something | head -10
+#  something | p 2    // something | head -20 | tail -10
+#  something | p 3    // something | head -30 | tail -10
+p() {
+  if [[ "$1" == "" ]]; then
+    head -10
+  elif [[ "$1" == "1" ]]; then
+    head -10
+  else
+    HEAD=$(($1 * 10))
+    head "-${HEAD}" | tail -10
+  fi
+}

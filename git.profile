@@ -142,6 +142,9 @@ alias gb='git for-each-ref --sort=-committerdate --format="%(committerdate:short
 # Display recent local branches - only a few of them (10 by default)
 alias gbh='gb | head'
 
+# gb count
+alias gbc='gb | wc -l'
+
 # Display recent local branches - short (only names) (sorted by last commit date)
 alias gbs='git for-each-ref --sort=-committerdate --format="%(refname:short)" refs/heads/'
 
