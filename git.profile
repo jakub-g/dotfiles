@@ -192,28 +192,36 @@ gbrexistsRemote() {
 # ======================================================
 
 # Check out the branch.
-alias gck='git checkout'
+alias gitco='git checkout'
+complete -F _gitbranches gitco
 
 # Usage:
 #  goto iss234
 alias goto='git checkout'
+complete -F _gitbranches goto
 
 # Create a new branch out of current branch.
 # Usage:
 #  forkto iss234
 alias forkto='git checkout -b'
+complete -F _gitbranches forkto
 
 # Rename current branch.
 # Usage:
 #  moveto iss234
 alias moveto='git branch -m'
+complete -F _gitbranches moveto
+
+# Rename a branch
+# Usage:
+#  rename oldname newname
+alias rename='git branch -m'
+complete -F _gitbranches rename
 
 # Master is checked out so frequently it deserves its own command.
 alias master='git checkout master'
-alias dev='git checkout dev'
-
-complete -F _gitbranches goto
-complete -F _gitbranches gck
+alias m='master'
+#alias dev='git checkout dev'
 
 # ======================================================
 # updating - from upstream
@@ -293,6 +301,12 @@ git-sync-remote(){
   git branch -ar | sed 's|^[ \t]*||' | grep -e "^${REMOTE_NAME}/" | sed "s|${REMOTE_NAME}/||" | xargs git fetch "${REMOTE_NAME}"
 }
 
+alias gbd='git branch -d'
+complete -F _gitbranches gbd
+
+alias gbD='git branch -D'
+complete -F _gitbranches gbD
+
 git-delete-merged-branches-local(){
   git branch --merged | grep -v "\*" | grep -v master | grep -v dev | xargs -n 1 git branch -d
 }
@@ -365,6 +379,8 @@ alias gamendauth='git commit --amend --author' # should be passed here, as "foo 
 alias gcp='git cherry-pick'
 complete -F _gitbranches gcp
 
+alias gcpa='gcp --abort'
+
 # Cherry-pick / back-port the bugfix: appends a line that says "(cherry picked from commit ...)"
 alias gcpx='git cherry-pick -x'
 complete -F _gitbranches gcpx
@@ -394,6 +410,8 @@ alias ghka="gcam ''"
 
 alias git-merge-theirs='git merge -X theirs'
 complete -F _gitbranches git-merge-theirs
+
+alias gm='git mergetool'
 
 # Resets to a commit, and squashes all further commit into one
 gsquash-over() {
@@ -508,3 +526,12 @@ complete -F _gitbranches gofwd
 
 # For fixing CRLF issues after adding .gitattributes file
 alias gfixCRLF="git rm --cached -r . && git reset --hard && git commit -a -m 'Normalize CRLF' -n"
+
+alias gk='gitk'
+complete -F _gitbranches gk
+
+archive() {
+  git tag archive/$1 $1
+  git branch -D $1
+}
+

@@ -85,3 +85,5 @@ alias dotpull='cp ~/*.profile .'
 
 # push dot profile files from cwd to ~
 alias dotpush='cp ./*.profile ~'
+
+alias dotdot='dot;dotpush;reload;cd -'
