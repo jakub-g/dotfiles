@@ -4,7 +4,7 @@ alias nnode='winpty -Xallow-non-tty node'
 
 alias ni='npm install --ignore-scripts'
 alias nt='npm test'
-alias ns='npm start'
+alias ns='npm start -- --no-ue'
 alias nr='npm run'
 alias npmrun='npm run'
 alias npmpublic='npm --userconfig /c/git/public.npmrc'
