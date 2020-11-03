@@ -137,7 +137,10 @@ alias gextensions='git ls-tree -r HEAD --name-only | perl -ne "print \$1 if m/\.
 # ======================================================
 
 # Display recent local branches and last commit date (sorted by last commit date)
-alias gb='git for-each-ref --sort=-committerdate --format="%(committerdate:short) %(refname:short)" refs/heads/'
+alias gb_min='git for-each-ref --sort=-committerdate --format="%(committerdate:short) %(refname:short)" refs/heads/'
+
+# Display recent local branches and last commit date (sorted by last commit date). Additionally, display last commit message
+alias gb='git for-each-ref --sort=-committerdate --format="%(committerdate:short) %(refname:short) %(color:cyan) %(contents:subject)" refs/heads/'
 
 # Display recent local branches - only a few of them (10 by default)
 alias gbh='gb | head'
