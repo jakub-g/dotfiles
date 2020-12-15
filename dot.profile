@@ -12,7 +12,7 @@ export HISTCONTROL=ignoredups:erasedups
 #if [[ -n "${ConEmuPID}" ]]; then
   #PROMPT_COMMAND='ConEmuC -StoreCWD; history -a'
 #fi
-export PROMPT_COMMAND='history -a'
+export PROMPT_COMMAND='history -a;'
 export MAVEN_OPTS=-Xmx1024m
 
 export GIT_PS1_SHOWDIRTYSTATE=false # unstaged (*) - staged (+)
@@ -87,3 +87,11 @@ alias dotpull='cp ~/*.profile .'
 alias dotpush='cp ./*.profile ~'
 
 alias dotdot='dot;dotpush;reload;cd -'
+
+updateGitRoot() {
+  if git rev-parse --is-inside-work-tree > /dev/null 2>&1 ; then
+    GITROOT="./"$(git rev-parse --show-cdup)
+  fi
+}
+
+export PROMPT_COMMAND='history -a; updateGitRoot'
