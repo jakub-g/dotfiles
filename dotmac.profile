@@ -68,17 +68,17 @@ PS1="$PS1"'$ '                 # prompt: always $
 source ~/unix-portable.profile
 source ~/unix-only.profile
 source ~/unix-only-mingw.profile
-source ~/win-mingw.profile
-source ~/ssh-agent.profile
+#source ~/win-mingw.profile
+#source ~/ssh-agent.profile
 source ~/git.profile
-source ~/github.profile
-source ~/bitbucket_fetchpr.profile
-source ~/bitbucket_pullrequest.profile
+#source ~/github.profile
+#source ~/bitbucket_fetchpr.profile
+#source ~/bitbucket_pullrequest.profile
 #source ~/ariatemplates.profile
-source ~/util.profile
-source ~/js.profile
-source ~/java.profile
-source ~/android.profile
+#source ~/util.profile
+##source ~/js.profile
+#source ~/java.profile
+#source ~/android.profile
 
 # pull dot profile files from ~ to cwd
 alias dotpull='cp ~/*.profile .'
@@ -88,10 +88,10 @@ alias dotpush='cp ./*.profile ~'
 
 alias dotdot='dot;dotpush;reload;cd -'
 
-updateGitRoot() {
-  if git rev-parse --is-inside-work-tree > /dev/null 2>&1 ; then
-    GITROOT="./"$(git rev-parse --show-cdup)
-  fi
-}
-
-export PROMPT_COMMAND='history -a; updateGitRoot'
+#updateGitRoot() {
+#  if git rev-parse --is-inside-work-tree > /dev/null 2>&1 ; then
+#    GITROOT="./"$(git rev-parse --show-cdup)
+#  fi
+#}
+#
+#export PROMPT_COMMAND='history -a; updateGitRoot'
