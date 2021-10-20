@@ -105,7 +105,7 @@ alias ghis='ghm | cat' # it displays in less even if is short enough, thus cat
 # Usage:
 #  gh
 #  ghm -50
-alias gh='ghm -20'
+alias gh='ghm -10'
 alias ghm='git --no-pager log --format="%C(yellow)%h%Creset %C(cyan)%cd%Creset %s %Cgreen%an%Creset" --date=short'
 
 # Like gh, if you want to display full commit message
@@ -536,5 +536,10 @@ complete -F _gitbranches gk
 archive() {
   git tag archive/$1 $1
   git branch -D $1
+}
+
+review() {
+  git fetch origin $1
+  git checkout origin/$1
 }
 
