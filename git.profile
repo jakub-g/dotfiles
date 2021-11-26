@@ -50,6 +50,7 @@ complete -F _gitbranches gshs
 # Same as gshs, but also shows committer (not only author)
 alias gshmeta='git show --stat --stat-width=140 --stat-name-width=120 --stat-graph-width=20 --pretty=fuller'
 alias gshm='gshmeta'
+alias gm='gshmeta'
 
 # Same as gshmeta but ignores EOL changes
 alias gshmetamin='gshmeta --ignore-space-at-eol'
@@ -397,6 +398,14 @@ alias gcpeol='git cherry-pick --strategy=recursive --strategy-option=renormalize
 complete -F _gitbranches gcpeol
 
 # ======================================================
+# undoing changes in files
+# ======================================================
+
+# Revert changes in a single file to the previous revision (from HEAD^)
+# Example: grevert foo.txt
+alias grevert='git checkout @^ --'
+
+# ======================================================
 # executing pre-commit hook
 # ======================================================
 # This will invoke the pre-commit hook, but cancel the commit due to empty commit message
@@ -414,7 +423,7 @@ alias ghka="gcam ''"
 alias git-merge-theirs='git merge -X theirs'
 complete -F _gitbranches git-merge-theirs
 
-alias gm='git mergetool'
+alias gmrg='git mergetool'
 
 # Resets to a commit, and squashes all further commit into one
 gsquash-over() {
