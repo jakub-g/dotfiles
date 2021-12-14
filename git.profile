@@ -107,7 +107,8 @@ alias ghis='ghm | cat' # it displays in less even if is short enough, thus cat
 #  gh
 #  ghm -50
 alias gh='ghm -10'
-alias ghm='git --no-pager log --format="%C(yellow)%h%Creset %C(cyan)%cd%Creset %s %Cgreen%an%Creset" --date=short'
+alias ghm='git --no-pager log --format="%C(yellow)%h%Creset %C(cyan)%cd%Creset %s %Cgreen%an%Creset" --date=format-local:"%F %R"'
+#alias ghm='git --no-pager log --format="%C(yellow)%h%Creset %C(cyan)%cd%Creset %s %Cgreen%an%Creset" --date=short'
 
 # Like gh, if you want to display full commit message
 # Usage:
