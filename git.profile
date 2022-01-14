@@ -145,7 +145,7 @@ alias gb_min='git for-each-ref --sort=-committerdate --format="%(committerdate:s
 alias gb='git for-each-ref --sort=-committerdate --format="%(committerdate:short) %(refname:short) %(color:cyan) %(contents:subject)" refs/heads/'
 
 # Display recent local branches - only a few of them (10 by default)
-alias gbh='gb | head'
+alias gbh='gb --color=always | head'
 
 # gb count
 alias gbc='gb | wc -l'
