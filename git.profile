@@ -41,11 +41,11 @@ alias gdw='git diff -w'
 
 # Display code diff of the tip in branch/tag/commit. Shows HEAD if parameterless.
 alias gsh='git show'
-complete -F _gitbranches gsh
+#complete -F _gitbranches gsh
 
 # Display diff stats of the tip in branch/tag/commit. Shows HEAD if parameterless.
 alias gshs='git show --stat --stat-width=140 --stat-name-width=120 --stat-graph-width=20'
-complete -F _gitbranches gshs
+#complete -F _gitbranches gshs
 
 # Same as gshs, but also shows committer (not only author)
 alias gshmeta='git show --stat --stat-width=140 --stat-name-width=120 --stat-graph-width=20 --pretty=fuller'
@@ -66,7 +66,7 @@ alias gdmin='git diff --color-words'
 #  findFilesChangedInCommit <commit-id>
 #  findFilesChangedInCommit HEAD
 alias findFilesChangedInCommit='git diff-tree -r --name-only --no-commit-id'
-complete -F _gitbranches findFilesChangedInCommit
+#complete -F _gitbranches findFilesChangedInCommit
 
 # Displays ".orig" files in a current folder and subfolders
 alias find-orig-files='findmine | grep -iE .orig$'
@@ -198,30 +198,30 @@ gbrexistsRemote() {
 
 # Check out the branch.
 alias gitco='git checkout'
-complete -F _gitbranches gitco
+#complete -F _gitbranches gitco
 
 # Usage:
 #  goto iss234
 alias goto='git checkout'
-complete -F _gitbranches goto
+#complete -F _gitbranches goto
 
 # Create a new branch out of current branch.
 # Usage:
 #  forkto iss234
 alias forkto='git checkout -b'
-complete -F _gitbranches forkto
+#complete -F _gitbranches forkto
 
 # Rename current branch.
 # Usage:
 #  moveto iss234
 alias moveto='git branch -m'
-complete -F _gitbranches moveto
+#complete -F _gitbranches moveto
 
 # Rename a branch
 # Usage:
 #  rename oldname newname
 alias rename='git branch -m'
-complete -F _gitbranches rename
+#complete -F _gitbranches rename
 
 # Master is checked out so frequently it deserves its own command.
 alias master='git checkout master'
@@ -307,10 +307,10 @@ git-sync-remote(){
 }
 
 alias gbd='git branch -d'
-complete -F _gitbranches gbd
+#complete -F _gitbranches gbd
 
 alias gbD='git branch -D'
-complete -F _gitbranches gbD
+#complete -F _gitbranches gbD
 
 git-delete-merged-branches-local(){
   git branch --merged | grep -v "\*" | grep -v master | grep -v dev | xargs -n 1 git branch -d
@@ -382,21 +382,21 @@ alias gamendauth='git commit --amend --author' # should be passed here, as "foo 
 
 # Cherry-pick
 alias gcp='git cherry-pick'
-complete -F _gitbranches gcp
+#complete -F _gitbranches gcp
 
 alias gcpa='gcp --abort'
 
 # Cherry-pick / back-port the bugfix: appends a line that says "(cherry picked from commit ...)"
 alias gcpx='git cherry-pick -x'
-complete -F _gitbranches gcpx
+#complete -F _gitbranches gcpx
 
 # Cherry-pick "theirs"
 alias gcptheirs='git cherry-pick -x --strategy recursive -X theirs'
-complete -F _gitbranches gcptheirs
+#complete -F _gitbranches gcptheirs
 
 # Cherry-pick discarding EOL changes
 alias gcpeol='git cherry-pick --strategy=recursive --strategy-option=renormalize'
-complete -F _gitbranches gcpeol
+#complete -F _gitbranches gcpeol
 
 # ======================================================
 # undoing changes in files
@@ -422,7 +422,7 @@ alias ghka="gcam ''"
 # ======================================================
 
 alias git-merge-theirs='git merge -X theirs'
-complete -F _gitbranches git-merge-theirs
+#complete -F _gitbranches git-merge-theirs
 
 alias gmrg='git mergetool'
 
@@ -504,7 +504,7 @@ alias gdelremote='git push origin --delete'
 # Delete a local branch (force).
 #  Usage:                          gdel foo
 alias gdel='git branch -D'
-complete -F _gitbranches gdel
+#complete -F _gitbranches gdel
 
 # ======================================================
 # bisecting
@@ -531,7 +531,7 @@ alias goback='git checkout HEAD~'
 gofwd() {
   git checkout `git rev-list --topo-order HEAD.."$*" | tail -1`
 }
-complete -F _gitbranches gofwd
+#complete -F _gitbranches gofwd
 
 # ======================================================
 # repo cleanup and other stuff
@@ -541,7 +541,7 @@ complete -F _gitbranches gofwd
 alias gfixCRLF="git rm --cached -r . && git reset --hard && git commit -a -m 'Normalize CRLF' -n"
 
 alias gk='gitk'
-complete -F _gitbranches gk
+#complete -F _gitbranches gk
 
 archive() {
   git tag archive/$1 $1
