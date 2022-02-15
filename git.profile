@@ -104,9 +104,9 @@ alias gss='git status -s'
 alias ghis='ghm | cat' # it displays in less even if is short enough, thus cat
 # Display flat short log.
 # Usage:
-#  gh
+#  gg
 #  ghm -50
-alias gh='ghm -10'
+alias gg='ghm -12'
 alias ghm='git --no-pager log --format="%C(yellow)%h%Creset %C(cyan)%cd%Creset %s %Cgreen%an%Creset" --date=format-local:"%F %R"'
 #alias ghm='git --no-pager log --format="%C(yellow)%h%Creset %C(cyan)%cd%Creset %s %Cgreen%an%Creset" --date=short'
 
