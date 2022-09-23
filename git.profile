@@ -108,6 +108,7 @@ alias ghis='ghm | cat' # it displays in less even if is short enough, thus cat
 #  ghm -50
 alias gg='ghm -12'
 alias ghm='git --no-pager log --format="%C(yellow)%h%Creset %C(cyan)%cd%Creset %s %Cgreen%an%Creset" --date=format-local:"%F %R"'
+alias ghm_narrow='ghm --date=format-local:"%R" --abbrev=6'
 #alias ghm='git --no-pager log --format="%C(yellow)%h%Creset %C(cyan)%cd%Creset %s %Cgreen%an%Creset" --date=short'
 
 # Like gh, if you want to display full commit message
@@ -313,11 +314,15 @@ alias gbD='git branch -D'
 #complete -F _gitbranches gbD
 
 git-delete-merged-branches-local(){
-  git branch --merged | grep -v "\*" | grep -v master | grep -v dev | xargs -n 1 git branch -d
+  git branch --merged | grep -v "\*" | grep -vE '(master|main|dev|prod|preprod)' | xargs -n 1 git branch -d
 }
 
 git-delete-merged-branches-remote(){
-  git branch -r --merged | grep -v master | grep origin | sed 's/origin\///' | xargs -n 1 git push --delete origin --no-verify
+  git branch -r --merged | grep -vE '(master|main|dev|prod|preprod)' | grep origin | sed 's/origin\///' | xargs -n 1 git push --delete origin --no-verify
+}
+
+git-delete-remote-tracking-branches-WIP() {
+  git branch --all | grep -vE '(master|main|dev|prod|preprod)' | grep remotes/origin | sed 's|remotes/||' | grep -v jakub | xargs -n 1 git branch -d -r
 }
 
 # ======================================================
@@ -548,8 +553,5 @@ archive() {
   git branch -D $1
 }
 
-review() {
-  git fetch origin $1
-  git checkout origin/$1
-}
+review() { git fetch origin $1:$1; git checkout $1; }
 
