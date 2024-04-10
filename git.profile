@@ -143,10 +143,14 @@ alias gextensions='git ls-tree -r HEAD --name-only | perl -ne "print \$1 if m/\.
 alias gb_min='git for-each-ref --sort=-committerdate --format="%(committerdate:short) %(refname:short)" refs/heads/'
 
 # Display recent local branches and last commit date (sorted by last commit date). Additionally, display last commit message
-alias gb='git for-each-ref --sort=-committerdate --format="%(committerdate:short) %(refname:short) %(color:cyan) %(contents:subject)" refs/heads/'
+alias gb='git for-each-ref --color=always --sort=-committerdate --format="%(committerdate:short) %(refname:short) %(color:cyan) %(contents:subject)" refs/heads/'
 
 # Display recent local branches - only a few of them (10 by default)
-alias gbh='gb --color=always | head'
+alias gbh='gb | head'
+alias gbh20='gb | head -20'
+alias gbh30='gb | head -30'
+alias gbh40='gb | head -40'
+alias gbh50='gb | head -50'
 
 # gb count
 alias gbc='gb | wc -l'
@@ -314,7 +318,7 @@ alias gbD='git branch -D'
 #complete -F _gitbranches gbD
 
 git-delete-merged-branches-local(){
-  git branch --merged | grep -v "\*" | grep -vE '(master|main|dev|prod|preprod)' | xargs -n 1 git branch -d
+  git branch --merged | grep -v "\*" | grep -vE '^(master|main|dev|prod|preprod)$' | xargs -n 1 git branch -d
 }
 
 git-delete-merged-branches-remote(){
