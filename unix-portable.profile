@@ -7,11 +7,13 @@
 # list files in current dir
 alias l='ll'
 
-# list files in current dir, one file per line, long output
+# list all files in current dir, one file per line, long output, colored
 alias ll='ls -l --color'
-
-# list all files in current dir, one file per line, long output
+# ...and include dotfiles
 alias lla='ls -la --color'
+# ...and human-friendly block sizes
+alias llh='ll --block-size=M'
+alias llah='lla --block-size=M'
 
 # count numbers of lines in a file
 alias wcl='wc -l'
