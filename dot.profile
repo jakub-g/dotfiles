@@ -77,7 +77,6 @@ source ~/bitbucket_pullrequest.profile
 #source ~/ariatemplates.profile
 source ~/util.profile
 source ~/js.profile
-source ~/java.profile
 source ~/android.profile
 
 # pull dot profile files from ~ to cwd

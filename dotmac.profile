@@ -19,8 +19,11 @@ export GIT_PS1_SHOWCOLORHINTS="true"
 source ~/dotfiles/unix-portable.profile
 source ~/dotfiles/unix-only.profile
 source ~/dotfiles/unix-only-mingw.profile
+source ~/dotfiles/mac.profile
 source ~/dotfiles/git.profile
 source ~/dotfiles/js.profile
+source ~/dotfiles/ddog.public.profile
+source ~/dotfiles/ddog.private.profile
 source ~/dotfiles/quarantine.private.profile
 
 alias dot='cd ~/dotfiles'
