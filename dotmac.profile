@@ -21,7 +21,7 @@ source ~/dotfiles/unix-only.profile
 source ~/dotfiles/unix-only-mingw.profile
 source ~/dotfiles/git.profile
 source ~/dotfiles/js.profile
-source ~/dotfiles/quarantine.profile
+source ~/dotfiles/quarantine.private.profile
 
 alias dot='cd ~/dotfiles'
 

@@ -1,4 +1,3 @@
-private.profile
 machine-specific.profile
-ddog.private.profile
-quarantine.profile
+private.profile
+*.private.profile
