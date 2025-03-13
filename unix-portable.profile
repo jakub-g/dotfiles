@@ -41,6 +41,9 @@ alias cd..='cd ../..'
 alias cd...='cd ../../..'
 alias cd....='cd ../../../..'
 
+# List files in a .tar.gz file (-t list -v verbose -z gzip -f filename)
+alias tar_preview='tar tvzf'
+
 # serve current directory on localhost:88 using Python 2/3
 alias serve='python -m SimpleHTTPServer 88'
 alias serve2='python -m SimpleHTTPServer 88'
@@ -75,3 +78,9 @@ p() {
     head "-${HEAD}" | tail -10
   fi
 }
+
+alias h10='head -10'
+alias h20='head -20'
+alias h30='head -30'
+alias h40='head -40'
+alias h50='head -50'

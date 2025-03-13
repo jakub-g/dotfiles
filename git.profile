@@ -559,3 +559,34 @@ archive() {
 
 review() { git fetch origin $1:$1; git checkout $1; }
 
+
+# 2025 ---------------------------------------------------------
+
+# gitignore a file, only locally, without modifying .gitignore
+git-ignore-local() {
+	echo "$1" >> .git/info/exclude
+}
+alias git-ignore-local-show='cat .git/info/exclude'
+alias git-ignore-local-edit='vim .git/info/exclude'
+
+# git rebase interactive (gri), with Sublime Text as editor
+alias subgri='GIT_EDITOR="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -n -w" gri'
+# git rebase interactive (gri), with VSCode as editor
+alias codegri='GIT_EDITOR="code --wait" gri'
+alias vsgri='codegri'
+
+alias gpf='git push --force-with-lease'
+
+alias prview='command gh pr view --web'
+alias preview='command gh pr view --web'
+alias propen='command gh pr create --web'
+
+alias myprs='command gh pr list --author @me'
+
+alias default_branch='git rev-parse --abbrev-ref origin/HEAD' # basename?
+
+alias empty='git commit --allow-empty -m "Empty commit, trigger CI" --no-verify && git push'
+
+git-big-files() {
+	 git ls-files | grep -v '.yarn' | grep  -iE '\.(j|t)s(x|on)?' | xargs ls -s | sort -nr | head -10
+}

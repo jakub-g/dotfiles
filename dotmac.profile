@@ -20,6 +20,10 @@ source ~/dotfiles/unix-portable.profile
 source ~/dotfiles/unix-only.profile
 source ~/dotfiles/unix-only-mingw.profile
 source ~/dotfiles/git.profile
+source ~/dotfiles/js.profile
+source ~/dotfiles/quarantine.profile
+
+alias dot='cd ~/dotfiles'
 
 # pull dot profile files from ~ to cwd
 alias dotpull='cp ~/*.profile .'
