@@ -1,6 +1,8 @@
 
 alias preprod='git checkout preprod'
 alias reb='git rebase origin/green'
+alias rebb='git rebase origin/preprod'
+alias rebbb='git rebase origin/preprod'
 alias gf='git fetch origin preprod prod green'
 
 alias gotoreb='git rebase origin/preprod'

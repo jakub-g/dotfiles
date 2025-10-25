@@ -3,7 +3,9 @@
 alias sub='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 alias subl='sub'
 
-alias reload='source ~/.zshrc; source ~/.zshenv'
+#alias reload='source ~/.zshrc; source ~/.zshenv'
+#alias reload='exec bash -l'
+alias reload='exec zsh -l'
 alias dotedit='sub ~/.zshrc; sub ~/.zshenv; sub ~/dotfiles/mac.profile'
 
 alias o='open .'
