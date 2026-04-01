@@ -1,6 +1,15 @@
 #!/bin/bash
 
 # ======================================================
+# terminal mgmt
+# ======================================================
+
+# set bg color of current terminal (works with iterm2 at least)
+bgcol() { echo -e "\033]11;#$1\007" }
+# name the current terminal window (works with iterm2 at least)
+name() { echo -ne "\033]0;$1\007" }
+
+# ======================================================
 # various standard linux commands
 # ======================================================
 
