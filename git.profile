@@ -106,8 +106,9 @@ alias ghis='ghm | cat' # it displays in less even if is short enough, thus cat
 # Usage:
 #  gg
 #  ghm -50
-alias gg='ghm -12'
 alias ghm='git --no-pager log --format="%C(yellow)%h%Creset %C(cyan)%cd%Creset %s %Cgreen%an%Creset" --date=format-local:"%F %R"'
+alias gg='ghm -12'
+alias ghh='ghm -12'
 alias ghm_narrow='ghm --date=format-local:"%R" --abbrev=6'
 #alias ghm='git --no-pager log --format="%C(yellow)%h%Creset %C(cyan)%cd%Creset %s %Cgreen%an%Creset" --date=short'
 
