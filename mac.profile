@@ -38,3 +38,25 @@ alias macos_show_desktop='defaults write com.apple.finder CreateDesktop true  ; 
 alias topmem='top -o mem'
 
 alias jqcless='jq -C | less -r'
+
+alias cld='claude'
+
+alias git-list-all-remote-branches='git ls-remote | grep 'refs/heads/' | cut -f2 | sed "s|refs/heads/||"'
+alias path='echo $PATH | tr ":" "\n"'
+
+alias dush='du -sh'
+
+alias gone='git branch -vv | grep gone'
+alias git-gone='gone'
+
+
+# function cdc() {
+#   cd "$HOME/Code/$1"
+# }
+
+# function _cdc() {
+#   ((CURRENT == 2)) &&
+#   _files -/ -W "$HOME/Code"
+# }
+
+# compdef _cdc cdc
