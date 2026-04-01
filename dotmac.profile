@@ -24,7 +24,6 @@ source ~/dotfiles/git.profile
 source ~/dotfiles/js.profile
 source ~/dotfiles/ddog.public.profile
 source ~/dotfiles/ddog.private.profile
-source ~/dotfiles/quarantine.private.profile
 
 alias dot='cd ~/dotfiles'
 
