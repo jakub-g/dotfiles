@@ -60,3 +60,13 @@ alias git-gone='gone'
 # }
 
 # compdef _cdc cdc
+
+
+
+# find files on disk, except in .git subfolder
+alias find-no-git="find . -type f -not -path '*/\.git/*'"
+
+# curl helpers
+alias jqcurl='curl -S -D /dev/stderr -X GET'
+alias curl-headers='curl -sS -I -X GET'
+alias curlh='curl-headers'
