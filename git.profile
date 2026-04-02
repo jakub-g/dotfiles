@@ -319,7 +319,7 @@ alias gbD='git branch -D'
 #complete -F _gitbranches gbD
 
 git-delete-merged-branches-local(){
-  git branch --merged | grep -v "\*" | grep -vE '^(master|main|dev|prod|preprod)$' | xargs -n 1 git branch -d
+  git branch --merged | grep -v "\*" | grep -vE '^(master|main|dev|prod|preprod|green)$' | xargs -n 1 git branch -d
 }
 
 git-delete-merged-branches-remote(){
