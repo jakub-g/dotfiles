@@ -7,7 +7,11 @@ setopt PROMPT_SUBST
 # Set the prompt. Will look like: 'jakub~/dev/reponame(jakub/branchname:13+150-) $'
 CURR_TIME='$(date +%H:%M:%S)'
 SUB_CURR_BRANCH='$(git rev-parse --abbrev-ref HEAD 2>/dev/null)'
-SUB_DIFF_PREPROD='$(git rev-list --left-right --count HEAD...origin/preprod 2>/dev/null | sed "s/\t/+/g")-'
+# To make this fast, run once:
+#  git commit-graph write --reachable
+#  git config --global fetch.writeCommitGraph true
+#SUB_DIFF_PREPROD='$(git rev-list --left-right --count HEAD...origin/preprod 2>/dev/null | sed "s/\t/+/g")-'
+SUB_DIFF_PREPROD='$(git for-each-ref --format="%(ahead-behind:HEAD)" refs/remotes/origin/preprod | awk "{print \$2, \$1}" | sed "s/ /+/g")-'
 CURR_FOLDER="~%"
 CURR_FOLDER_SHORT='$(echo "$PWD" | sed -e "s|^/Users/$USER/go/src/github.com/||")'
 #SUB_DIFF_PREPROD=''
