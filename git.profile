@@ -591,3 +591,29 @@ alias empty='git commit --allow-empty -m "Empty commit, trigger CI" --no-verify 
 git-big-files() {
 	 git ls-files | grep -v '.yarn' | grep  -iE '\.(j|t)s(x|on)?' | xargs ls -s | sort -nr | head -10
 }
+
+
+# Usage: squash 7: will take last 6 commits and squash on top of commit number one
+squash() {
+    # 1. Check if the user provided an argument
+    if [ -z "$1" ]; then
+        echo "Usage: squash <number_of_commits>"
+        return 1
+    fi
+
+    # 2. Ensure the argument is a number and at least 2
+    if ! [[ "$1" =~ ^[0-9]+$ ]] || [ "$1" -lt 2 ]; then
+        echo "Error: You must provide a number greater than or equal to 2."
+        return 1
+    fi
+
+    # Calculate the offset (N-1)
+    local offset=$(( $1 - 1 ))
+
+    # 3. Perform the squash
+    # Moves HEAD back to the oldest commit of the N range
+    # Then amends it with all staged changes from the subsequent commits
+    git reset --soft "HEAD~$offset" && \
+    git commit --amend --no-edit --no-verify && \
+    echo "Successfully squashed last $1 commits into '$(git log -1 --format=%s)'"
+}
