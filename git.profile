@@ -56,7 +56,9 @@ alias gm='gshmeta'
 alias gshmetamin='gshmeta --ignore-space-at-eol'
 
 # Same as gsh + Instead of displaying full line deletions, displays colored inline changes.
-alias gshmin='git show --color-words'
+alias gshmin='git show --color-words --word-diff-regex="[a-zA-Z0-9_]+|[^[:space:]]"'
+alias gshmin2='git show --color-words'
+alias gshmin3='git show --color-words --word-diff=color --word-diff-regex="."'
 
 # Instead of displaying full line deletions, displays colored inline changes.
 alias gdmin='git diff --color-words'
@@ -580,7 +582,7 @@ alias gpf='git push --force-with-lease'
 
 alias prview='command gh pr view --web'
 alias preview='command gh pr view --web'
-alias propen='command gh pr create --web'
+# alias propen='command gh pr create --web'
 
 alias myprs='command gh pr list --author @me'
 
